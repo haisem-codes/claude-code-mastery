@@ -1,6 +1,34 @@
 # Setup My Claude Code Configuration
 
-You are a Claude Code configuration expert. Your job is to analyze this codebase and create a personalized, production-grade Claude Code setup. Follow these phases exactly.
+You are a Claude Code configuration expert. Your job is to analyze this codebase and create a personalized, production-grade Claude Code setup using the claude-code-mastery resource library. Follow these phases exactly.
+
+---
+
+## Phase 0: Clone the Resource Library
+
+Before doing anything else, clone the claude-code-mastery repo so you have access to 190+ skills, 33 agents, 10 hook scripts, and config templates.
+
+```bash
+# Clone into a temp directory (won't affect the user's project)
+git clone https://github.com/haisem-codes/claude-code-mastery.git /tmp/claude-code-mastery 2>/dev/null || echo "Already cloned"
+```
+
+Verify the repo has what we need:
+
+```bash
+ls /tmp/claude-code-mastery/skills/ /tmp/claude-code-mastery/agents/ /tmp/claude-code-mastery/hooks/ /tmp/claude-code-mastery/templates/ 2>/dev/null
+```
+
+**This repo contains:**
+
+| Directory | Contents |
+|-----------|----------|
+| `skills/` | 190+ skills across 12 domains (engineering, marketing, c-suite, compliance, product, PM, finance, sales) |
+| `agents/` | 33 specialized subagents (development, infrastructure, data-ai, quality-testing, security, business) |
+| `hooks/` | 10 hook scripts (branch protection, secret blocking, auto-format, auto-lint, auto-test, skill evaluation) |
+| `templates/` | Global + project CLAUDE.md, settings.json, rules, and 6 stack-specific supplements |
+
+You will use these resources throughout the setup to copy relevant skills, agents, and hooks into the user's config.
 
 ---
 
@@ -33,6 +61,22 @@ git branch --show-current 2>/dev/null
 ls .github/workflows/ 2>/dev/null
 ```
 
+Also scan the cloned resource library to identify matching skills for the detected stack:
+
+```bash
+# List available skill domains
+ls /tmp/claude-code-mastery/skills/
+
+# List available agents
+ls /tmp/claude-code-mastery/agents/development/ /tmp/claude-code-mastery/agents/data-ai/ /tmp/claude-code-mastery/agents/infrastructure/ /tmp/claude-code-mastery/agents/quality-testing/ /tmp/claude-code-mastery/agents/security/ /tmp/claude-code-mastery/agents/business/ /tmp/claude-code-mastery/agents/specialization/
+
+# List available hooks
+ls /tmp/claude-code-mastery/hooks/pre-tool-use/ /tmp/claude-code-mastery/hooks/post-tool-use/ /tmp/claude-code-mastery/hooks/user-prompt-submit/
+
+# List stack-specific templates
+ls /tmp/claude-code-mastery/templates/stacks/
+```
+
 ---
 
 ## Phase 2: Report Findings and Ask Questions
@@ -58,9 +102,9 @@ Then ask the user these 5 questions:
 
 1. **Scope**: Do you want global config (~/.claude/), project config (.claude/), or both?
 2. **Security level**: Standard (sensible defaults) or Strict (deny dangerous commands, block credential reads, branch protection hooks)?
-3. **Your role**: What do you primarily do? (backend dev, frontend dev, full-stack, mobile dev, data engineer, devops, etc.)
+3. **Your role**: What do you primarily do? (backend dev, frontend dev, full-stack, mobile dev, data engineer, devops, product manager, marketing, executive/C-suite, compliance, finance, sales, etc.)
 4. **Hooks**: Do you want automated hooks? (auto-format on save, auto-lint, auto-test, block edits on main branch)
-5. **Team size**: Solo developer or team? (affects PR workflow and CI/CD recommendations)
+5. **Skill domains**: Which areas interest you? We have skills for: Engineering (63), Marketing (43), C-Suite Advisory (34), Compliance (12), Product (8), Project Management (6), Business Growth (4), Finance (1), plus Anthropic official tools (16). Pick any combination or say "all relevant".
 
 **Wait for answers before proceeding to Phase 3.**
 
@@ -119,47 +163,175 @@ Based on the analysis and user answers, generate these files.
 - Auto-lint hook if user requested it
 - Any project-specific deny rules
 
-### 3C. Recommendations
+### 3C. Install Skills from Resource Library
 
-Based on the detected stack and user role, recommend:
+Based on the detected stack, user role, and chosen skill domains, copy relevant skills from the cloned repo into `~/.claude/skills/`.
 
-- **Skills to install** -- Suggest relevant skills from the claude-code-mastery repo (e.g., fastapi-patterns for Python APIs, webapp-testing for frontend projects)
-- **MCP servers** -- Suggest relevant MCP servers (sequential-thinking for complex problems, context7 for documentation lookup, etc.)
-- **Workflow tips** -- 2-3 specific tips for their stack (e.g., "Use /pr-workflow for pull requests" or "Add a pre-commit hook for ruff")
+**Skill mapping by stack:**
+
+| Stack | Skills to install |
+|-------|-------------------|
+| Python/FastAPI | `reference/fastapi-patterns`, `reference/postgres-optimization`, `reference/perf-profiler`, `engineering/api-design-reviewer`, `engineering/performance-profiler` |
+| TypeScript/Next.js | `engineering-team/senior-architect`, `engineering/ci-cd-pipeline-builder` |
+| Flutter/Dart | `engineering-team/senior-architect` |
+| Any with DB | `reference/postgres-optimization`, `engineering/database-designer` |
+| Any with CI/CD | `engineering/ci-cd-pipeline-builder`, `engineering/observability-designer` |
+
+**Skill mapping by role:**
+
+| Role | Skills to install |
+|------|-------------------|
+| Marketing | `marketing/ai-seo`, `marketing/content-creator`, `marketing/ad-creative`, `marketing/analytics-tracking` + others from marketing/ |
+| C-Suite/Executive | `c-level-advisor/ceo-advisor`, `c-level-advisor/cfo-advisor`, etc. based on their specific role |
+| Product Manager | `product/product-strategist`, `product/agile-product-owner`, `product/ux-researcher-designer` |
+| Project Manager | `project-management/scrum-master`, `project-management/senior-pm`, `project-management/jira-expert` |
+| Compliance | `compliance/gdpr-dsgvo-expert`, `compliance/isms-audit-expert`, etc. based on their industry |
+| Sales/Business | `business-growth/sales-engineer`, `business-growth/revenue-operations`, `business-growth/customer-success-manager` |
+| Finance | `finance/financial-analyst` |
+
+**Always install** (useful for everyone):
+- Anthropic official skills: `anthropic-official/pdf`, `anthropic-official/docx`, `anthropic-official/xlsx`
+
+Install by copying from the cloned repo:
+
+```bash
+# Create skills directory if it doesn't exist
+mkdir -p ~/.claude/skills
+
+# Copy selected skills (example -- adapt based on user's choices)
+cp -r /tmp/claude-code-mastery/skills/reference/fastapi-patterns ~/.claude/skills/
+cp -r /tmp/claude-code-mastery/skills/engineering/api-design-reviewer ~/.claude/skills/
+cp -r /tmp/claude-code-mastery/skills/anthropic-official/pdf ~/.claude/skills/
+# ... add more based on analysis
+```
+
+Read each skill's SKILL.md before copying to confirm it's relevant. Show the user a table of selected skills with one-line descriptions and get confirmation before copying.
+
+### 3D. Install Agents from Resource Library
+
+Based on the user's role and stack, recommend and install relevant subagents.
+
+**Agent mapping:**
+
+| Need | Agents |
+|------|--------|
+| Code quality | `quality-testing/code-reviewer`, `quality-testing/architect-review` |
+| Backend dev | `development/backend-architect`, `development/python-pro` or `development/golang-pro` |
+| Frontend dev | `development/frontend-developer`, `development/react-pro`, `development/nextjs-pro` |
+| Full-stack | `development/full-stack-developer`, `development/backend-architect`, `development/frontend-developer` |
+| Data/AI | `data-ai/ai-engineer`, `data-ai/database-optimizer`, `data-ai/prompt-engineer` |
+| DevOps | `infrastructure/cloud-architect`, `infrastructure/deployment-engineer`, `infrastructure/devops-incident-responder` |
+| Testing | `quality-testing/qa-expert`, `quality-testing/test-automator` |
+| Security | `security/` agents |
+| Orchestration | `agent-organizer.md` (master orchestrator that delegates to other agents) |
+
+**Always recommend:** `quality-testing/code-reviewer` (useful for everyone writing code)
+
+Install by copying the agent .md files into the project or global config:
+
+```bash
+# Agents go into the project's .claude/agents/ directory (or wherever subagents are configured)
+mkdir -p .claude/agents
+
+# Copy selected agents
+cp /tmp/claude-code-mastery/agents/quality-testing/code-reviewer.md .claude/agents/
+cp /tmp/claude-code-mastery/agents/agent-organizer.md .claude/agents/
+# ... add more based on analysis
+```
+
+Show the user a table of selected agents with descriptions and get confirmation before copying.
+
+### 3E. Install Hooks from Resource Library
+
+Based on the user's security level and hook preferences, copy relevant hook scripts.
+
+**Available hooks:**
+
+| Hook | File | Purpose |
+|------|------|---------|
+| Block main branch edits | `pre-tool-use/block-main-branch.sh` | Prevents accidental edits on main/master |
+| Block dangerous commands | `pre-tool-use/block-dangerous-commands.sh` | Blocks rm -rf, sudo, dd, etc. |
+| Block secret file reads | `pre-tool-use/block-secret-reads.sh` | Blocks reading .env, .key, .pem files |
+| Enforce package manager | `pre-tool-use/enforce-package-manager.sh` | Ensures consistent package manager usage |
+| Auto-format | `post-tool-use/auto-format.sh` | Formats files after every edit |
+| Auto-lint | `post-tool-use/auto-lint.sh` | Lints files after every edit |
+| Auto-test | `post-tool-use/auto-test.sh` | Runs related tests after every edit |
+| Skill evaluation | `user-prompt-submit/skill-eval.sh` + `skill-eval.js` + `skill-rules.json` | Auto-matches prompts to relevant skills |
+
+For **Standard security**: install block-main-branch + auto-format
+For **Strict security**: install all pre-tool-use hooks + auto-format + auto-lint
+
+```bash
+# Read each hook script before installing to adapt paths to user's system
+cat /tmp/claude-code-mastery/hooks/pre-tool-use/block-main-branch.sh
+```
+
+Read each hook script, adapt any hardcoded paths to the user's system (package manager, formatter command, etc.), then integrate into the user's settings.json hooks configuration. Do NOT blindly copy -- adapt the command strings to match the user's detected stack.
+
+### 3F. Additional Recommendations
+
+- **MCP servers** -- Suggest relevant MCP servers (sequential-thinking for complex problems, context7 for documentation lookup, playwright for web testing)
+- **Stack templates** -- If a matching stack template exists in `/tmp/claude-code-mastery/templates/stacks/`, read it and incorporate relevant patterns into the project CLAUDE.md
+- **Workflow tips** -- 2-3 specific tips for their stack
 
 ---
 
 ## Phase 4: Apply Configuration
 
-For each file to be created:
+Work through each category in order. For each file/skill/agent/hook to be installed:
 
-1. Show the complete file content in a code block
-2. Ask: "Create this file? (y/n/edit)"
-3. If the user says "y", write the file
+1. Show what will be created/copied in a clear table
+2. Ask: "Apply this batch? (y/n/edit)"
+3. If the user says "y", execute all operations in the batch
 4. If the user says "edit", ask what to change, update, and show again
-5. If the user says "n", skip it
+5. If the user says "n", skip the batch
 
-After all files are processed, print this summary:
+**Batch order:**
+
+1. **Config files** -- CLAUDE.md, settings.json, rules/ (show full content)
+2. **Skills** -- Copy selected skills from /tmp/claude-code-mastery/skills/ to ~/.claude/skills/
+3. **Agents** -- Copy selected agents from /tmp/claude-code-mastery/agents/ to .claude/agents/
+4. **Hooks** -- Integrate adapted hook commands into settings.json
+5. **Stack templates** -- Merge relevant stack supplement into project CLAUDE.md
+
+After all batches are processed, clean up and print the summary:
+
+```bash
+# Clean up the cloned repo
+rm -rf /tmp/claude-code-mastery
+```
 
 ```
 ## Setup Complete
 
-### Files Created
-- [x] ~/.claude/CLAUDE.md
-- [x] ~/.claude/settings.json
+### Config Files
+- [x] ~/.claude/CLAUDE.md (global rules)
+- [x] ~/.claude/settings.json (permissions + hooks)
 - [x] ~/.claude/rules/security.md
 - [x] ~/.claude/rules/verification.md
-- [x] CLAUDE.md (project config)
-- [x] .claude/settings.json (project hooks)
+- [x] ./CLAUDE.md (project config)
+- [x] ./.claude/settings.json (project hooks)
+
+### Skills Installed (X total)
+- [x] skill-name -- description
+- [x] ...
+
+### Agents Installed (X total)
+- [x] agent-name -- description
+- [x] ...
+
+### Hooks Configured (X total)
+- [x] hook-name -- description
+- [x] ...
 
 ### Next Steps
 1. Start a new Claude Code session to load the config
-2. Install recommended skills (copy to ~/.claude/skills/)
-3. Install recommended MCP servers (add to .mcp.json)
-4. Run `claude config list` to verify settings loaded
+2. Run `claude config list` to verify settings loaded
+3. Try a task to see skills and agents in action
+4. Read the guide for advanced patterns: https://github.com/haisem-codes/claude-code-mastery/tree/main/guide
 ```
 
-Mark files that were skipped with `[ ]` instead of `[x]`.
+Mark items that were skipped with `[ ]` instead of `[x]`.
 
 ---
 
