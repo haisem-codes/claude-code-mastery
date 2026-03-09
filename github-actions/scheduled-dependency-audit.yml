@@ -1,0 +1,21 @@
+name: Biweekly Dependency Audit
+on:
+  schedule:
+    - cron: '0 9 1,15 * *'  # 1st and 15th of each month
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Audit dependencies
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            1. Run dependency audit (pip-audit, npm audit, or equivalent)
+            2. Update any safe minor/patch versions
+            3. Flag major version bumps for manual review
+            4. Run tests after updates to verify nothing breaks
+            5. Create a PR with safe updates

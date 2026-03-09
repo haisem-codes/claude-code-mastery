@@ -1,0 +1,23 @@
+name: Weekly Code Quality
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9am UTC
+  workflow_dispatch:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Quality review
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            Pick 3 random directories in the codebase and review for:
+            1. Dead code and unused imports
+            2. Functions >100 lines or complexity >8
+            3. Missing error handling
+            4. Security issues
+
+            Create a PR fixing any issues found. Keep changes minimal and atomic.

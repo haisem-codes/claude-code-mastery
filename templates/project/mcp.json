@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-sequential-thinking"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-context7"],
+      "description": "Library documentation lookup via resolve-library-id + get-library-docs"
+    }
+  }
+}

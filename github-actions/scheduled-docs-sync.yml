@@ -1,0 +1,25 @@
+name: Monthly Docs Sync
+on:
+  schedule:
+    - cron: '0 9 1 * *'  # First day of each month at 9am UTC
+  workflow_dispatch:
+
+jobs:
+  docs-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get recent commits
+        run: |
+          git log --oneline --since="1 month ago" > recent-commits.txt
+
+      - name: Sync documentation
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            Review the recent commits and check if documentation is still accurate.
+            Update any outdated READMEs, API docs, or code comments.
+            Create a PR with the changes.

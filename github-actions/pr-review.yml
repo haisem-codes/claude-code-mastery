@@ -1,0 +1,37 @@
+name: Claude Code PR Review
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get PR diff
+        id: diff
+        run: |
+          git diff origin/${{ github.base_ref }}...HEAD > pr-diff.txt
+          echo "diff_size=$(wc -l < pr-diff.txt)" >> $GITHUB_OUTPUT
+
+      - name: Review with Claude
+        if: steps.diff.outputs.diff_size > 0
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: |
+            Review this PR diff for:
+            1. Security vulnerabilities (OWASP top 10)
+            2. Performance issues (N+1 queries, missing indexes, blocking I/O)
+            3. Code quality (complexity, naming, error handling)
+            4. Missing tests for new logic
+
+            Be specific: file:line references, concrete suggestions.
+            Skip style/formatting — linters handle that.
+          diff_file: pr-diff.txt
