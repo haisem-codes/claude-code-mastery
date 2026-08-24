@@ -1,3 +1,8 @@
+---
+name: release-manager
+description: Manage releases end to end: parse conventional commits, generate changelogs, determine version bumps and orchestrate the release process. Use when preparing, cutting or automating a release.
+---
+
 # Release Manager
 
 **Tier:** POWERFUL  

@@ -1,3 +1,8 @@
+---
+name: changelog-generator
+description: Produce auditable release notes from Conventional Commits, with separate commit parsing, semantic version bump logic and changelog rendering. Use when cutting a release, writing release notes, or deciding a semver bump.
+---
+
 # Changelog Generator
 
 **Tier:** POWERFUL  

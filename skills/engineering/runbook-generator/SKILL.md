@@ -1,3 +1,8 @@
+---
+name: runbook-generator
+description: Generate operational runbooks from a codebase: detects CI/CD, database, hosting and container stack, then writes step-by-step procedures with commands, verification, rollback and escalation paths. Use when documenting deploys, incidents or on-call procedures.
+---
+
 # Runbook Generator
 
 **Tier:** POWERFUL  

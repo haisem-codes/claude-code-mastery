@@ -1,3 +1,8 @@
+---
+name: database-designer
+description: Expert database design, analysis and optimization: schema design, index optimization and migration management for modern database systems. Use when designing a new schema, diagnosing slow queries, or planning a schema migration.
+---
+
 # Database Designer - POWERFUL Tier Skill
 
 ## Overview

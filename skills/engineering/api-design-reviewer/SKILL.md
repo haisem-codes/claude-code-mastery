@@ -1,3 +1,8 @@
+---
+name: api-design-reviewer
+description: Review REST API designs for convention compliance, breaking changes and overall design quality, producing a lint report and a scorecard. Use when reviewing an API spec or OpenAPI document, designing new endpoints, or checking whether a change is breaking.
+---
+
 # API Design Reviewer
 
 **Tier:** POWERFUL  

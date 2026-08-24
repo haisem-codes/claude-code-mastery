@@ -52,7 +52,9 @@ Hooks are shell commands that run automatically at specific points in Claude Cod
 
 ### Input format
 
-Hooks receive JSON via stdin (or via the `$TOOL_INPUT` environment variable):
+Hooks receive their payload as JSON on **stdin**. There is no `$TOOL_INPUT`
+environment variable — a hook that reads one gets an empty string, silently
+does nothing, and still looks installed. Read stdin with `jq`:
 
 ```jsonc
 {
@@ -93,7 +95,7 @@ Registration: `"matcher": "Edit|MultiEdit|Write"` -- see [hooks/pre-tool-use/blo
 
 ```bash
 #!/usr/bin/env bash
-CMD=$(echo "$TOOL_INPUT" | jq -r '.command // empty')
+CMD=$(jq -r '.tool_input.command // empty')
 if echo "$CMD" | grep -qE 'rm[[:space:]]+-[^[:space:]]*r[^[:space:]]*f'; then
   echo 'BLOCKED: Use trash or specific file deletion instead of rm -rf' >&2
   exit 2
@@ -122,7 +124,7 @@ Run after Claude executes a tool. Cannot block (the action already happened). Al
 
 ```bash
 #!/usr/bin/env bash
-FILE=$(echo "$TOOL_INPUT" | jq -r '.file_path // empty')
+FILE=$(jq -r '.tool_input.file_path // empty')
 [ -z "$FILE" ] && exit 0
 case "$FILE" in
   *.py)                      ruff format "$FILE" 2>/dev/null ;;
@@ -209,7 +211,7 @@ See [hooks/user-prompt-submit/skill-eval.js](../hooks/user-prompt-submit/skill-e
 
 ```bash
 #!/usr/bin/env bash
-INPUT="${TOOL_INPUT:-$(cat)}"
+INPUT="$(cat)"
 VALUE=$(echo "$INPUT" | jq -r '.your_field // empty')
 
 if [ "condition" ]; then
@@ -223,7 +225,7 @@ exit 0
 
 ```bash
 #!/usr/bin/env bash
-INPUT="${TOOL_INPUT:-$(cat)}"
+INPUT="$(cat)"
 FILE=$(echo "$INPUT" | jq -r '.file_path // empty')
 [ -z "$FILE" ] && exit 0
 # Your action here

@@ -1,3 +1,8 @@
+---
+name: ci-cd-pipeline-builder
+description: Generate CI/CD pipelines from detected project stack signals, with repeatable checks and environment-aware deployment stages. Use when setting up CI for a project, adding a deployment stage, or migrating between CI providers.
+---
+
 # CI/CD Pipeline Builder
 
 **Tier:** POWERFUL  

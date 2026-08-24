@@ -1,3 +1,8 @@
+---
+name: agent-designer
+description: Design and evaluate multi-agent systems: architecture patterns, agent role definition, tool design principles, communication strategies and evaluation frameworks. Use when architecting an agent system, defining agent roles and boundaries, or reviewing an existing multi-agent design.
+---
+
 # Agent Designer - Multi-Agent System Architecture
 
 **Tier:** POWERFUL  

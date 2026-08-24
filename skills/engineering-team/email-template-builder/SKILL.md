@@ -1,3 +1,8 @@
+---
+name: email-template-builder
+description: Build transactional email systems with React Email: templates, provider integration, preview server, i18n, dark mode, spam optimization and analytics. Targets Resend, Postmark, SendGrid and AWS SES. Use when adding or redesigning transactional email.
+---
+
 # Email Template Builder
 
 **Tier:** POWERFUL  

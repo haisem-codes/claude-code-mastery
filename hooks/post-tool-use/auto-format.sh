@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
-# PostToolUse hook: Auto-format files after editing
-# Usage: Add to settings.json under hooks.PostToolUse with matcher "Edit|Write"
-FILE=$(echo "$TOOL_INPUT" | jq -r '.file_path // empty')
-[ -z "$FILE" ] && exit 0
+# PostToolUse hook: format a file after it is edited.
+# Register with matcher "Edit|MultiEdit|Write". Payload arrives on stdin.
+set -u
+
+command -v jq >/dev/null 2>&1 || exit 0
+
+FILE=$(jq -r '.tool_input.file_path // empty')
+{ [ -z "$FILE" ] || [ ! -f "$FILE" ]; } && exit 0
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
 case "$FILE" in
-  *.py)     ruff format "$FILE" 2>/dev/null ;;
-  *.ts|*.tsx|*.js|*.jsx) npx prettier --write "$FILE" 2>/dev/null ;;
-  *.go)     gofmt -w "$FILE" 2>/dev/null ;;
-  *.rs)     rustfmt "$FILE" 2>/dev/null ;;
+  *.py)                   have ruff     && ruff format "$FILE" ;;
+  *.ts|*.tsx|*.js|*.jsx|*.json|*.css|*.md)
+                          have prettier && prettier --write "$FILE" ;;
+  *.go)                   have gofmt    && gofmt -w "$FILE" ;;
+  *.rs)                   have rustfmt  && rustfmt "$FILE" ;;
 esac
 exit 0

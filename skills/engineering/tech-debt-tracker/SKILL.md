@@ -1,3 +1,8 @@
+---
+name: tech-debt-tracker
+description: Identify, classify, prioritize and track technical debt across code, architecture, test and documentation dimensions. Use when planning refactor work, justifying a debt paydown, or assessing the cost of a shortcut.
+---
+
 # Tech Debt Tracker
 
 **Tier**: POWERFUL 🔥  

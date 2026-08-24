@@ -1,3 +1,8 @@
+---
+name: pr-review-expert
+description: Systematic review of GitHub PRs and GitLab MRs: blast radius analysis, security scanning, breaking change detection and test coverage delta, delivered as a prioritized report. Use when reviewing a pull request or assessing the risk of a change.
+---
+
 # PR Review Expert
 
 **Tier:** POWERFUL

@@ -1,3 +1,8 @@
+---
+name: performance-profiler
+description: Profile Node.js, Python and Go applications to find CPU, memory and I/O bottlenecks: flamegraphs, bundle analysis, query optimization, leak detection and k6/Artillery load tests. Always measures before and after. Use when something is slow and you need data.
+---
+
 # Performance Profiler
 
 **Tier:** POWERFUL  

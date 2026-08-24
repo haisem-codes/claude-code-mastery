@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
-# PreToolUse hook: Enforce consistent package manager
-# Usage: Customize ALLOWED_PM and add to settings.json
-ALLOWED_PM="pnpm"  # Change to: npm, yarn, pnpm, or bun
-CMD=$(echo "$TOOL_INPUT" | jq -r '.command // empty')
+# PreToolUse hook: enforce one package manager across a project.
+# Set ALLOWED_PM, register with matcher "Bash". Payload arrives on stdin.
+set -u
+
+ALLOWED_PM="${ALLOWED_PM:-pnpm}"   # npm | yarn | pnpm | bun
+
+command -v jq >/dev/null 2>&1 || exit 0   # advisory hook: degrade quietly
+
+CMD=$(jq -r '.tool_input.command // empty')
+[ -z "$CMD" ] && exit 0
+
 case "$CMD" in
-  npm\ install*|npm\ i\ *|yarn\ add*|yarn\ install*|bun\ add*|bun\ install*)
-    if ! echo "$CMD" | grep -q "^$ALLOWED_PM"; then
-      echo "BLOCKED: Use $ALLOWED_PM instead. This project enforces $ALLOWED_PM as the package manager." >&2
-      exit 2
-    fi
+  npm\ install*|npm\ i\ *|npm\ add*|yarn\ add*|yarn\ install*|bun\ add*|bun\ install*|pnpm\ add*|pnpm\ install*)
+    case "$CMD" in
+      "$ALLOWED_PM"\ *) exit 0 ;;
+      *)
+        echo "BLOCKED: this project uses $ALLOWED_PM. Re-run the command with $ALLOWED_PM." >&2
+        exit 2
+        ;;
+    esac
     ;;
 esac
+exit 0

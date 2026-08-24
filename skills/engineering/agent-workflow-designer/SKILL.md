@@ -1,3 +1,8 @@
+---
+name: agent-workflow-designer
+description: Design production multi-agent orchestration using five core patterns: sequential pipeline, parallel fan-out/fan-in, hierarchical delegation, event-driven and consensus. Covers handoff protocols, state management, error recovery, context budgeting and cost. Use when choosing an orchestration pattern or debugging agent handoffs.
+---
+
 # Agent Workflow Designer
 
 **Tier:** POWERFUL  

@@ -1,3 +1,8 @@
+---
+name: stripe-integration-expert
+description: Implement production Stripe integrations: subscriptions with trials and proration, one-time payments, usage-based billing, checkout sessions, idempotent webhook handlers, customer portal and invoicing, for Next.js, Express and Django. Use when adding or debugging billing.
+---
+
 # Stripe Integration Expert
 
 **Tier:** POWERFUL  

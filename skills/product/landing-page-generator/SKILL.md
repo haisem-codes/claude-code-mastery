@@ -1,3 +1,8 @@
+---
+name: landing-page-generator
+description: Generate high-converting landing pages from a product description: Next.js/React components with section variants, proven copy frameworks, SEO meta and performance-first patterns. Use when building a landing or marketing page that needs real copy, not placeholder text.
+---
+
 # Landing Page Generator
 
 **Tier:** POWERFUL  

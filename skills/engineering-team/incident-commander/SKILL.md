@@ -1,3 +1,8 @@
+---
+name: incident-commander
+description: Run incident response from detection through resolution and postmortem: severity classification, timeline reconstruction and post-incident analysis. Use during a live incident or when writing a blameless postmortem.
+---
+
 # Incident Commander Skill
 
 **Category:** Engineering Team  
