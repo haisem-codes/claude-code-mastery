@@ -19,10 +19,23 @@ import argparse
 import hashlib
 import json
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 MANIFEST_NAME = ".mastery-manifest.json"
+
+
+def repo_commit(repo: Path) -> str:
+    """The commit installed from. Recorded here rather than in catalog.json,
+    which must stay byte-stable across commits for CI's staleness check."""
+    try:
+        return subprocess.run(
+            ["git", "-C", str(repo), "rev-parse", "HEAD"],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+    except (subprocess.CalledProcessError, OSError):
+        return "unknown"
 
 
 # ----------------------------------------------------------------- helpers
@@ -239,8 +252,7 @@ def cmd_install(args) -> int:
     sel = resolve_selection(repo, args)
     manifest = load_json(cfg / MANIFEST_NAME, {"version": 1, "items": {}})
     manifest["source"] = str(repo)
-    cat = load_json(repo / "catalog.json", {})
-    manifest["source_commit"] = cat.get("generated_from", "unknown")
+    manifest["source_commit"] = repo_commit(repo)
 
     rep = Reporter()
 

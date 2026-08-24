@@ -199,16 +199,6 @@ def collect_examples() -> list:
     return out
 
 
-def git_sha() -> str:
-    try:
-        return subprocess.run(
-            ["git", "-C", str(REPO), "rev-parse", "HEAD"],
-            capture_output=True, text=True, check=True,
-        ).stdout.strip()
-    except (subprocess.CalledProcessError, OSError):
-        return "unknown"
-
-
 def build() -> dict:
     skills = collect_skills()
     agents = collect_agents()
@@ -219,8 +209,12 @@ def build() -> dict:
     for s in installable:
         domains.setdefault(s["domain"], 0)
         domains[s["domain"]] += 1
+    # Deliberately no git SHA here. catalog.json describes the *content* of the
+    # repo, and CI asserts it is not stale by regenerating and diffing. Embedding
+    # HEAD would make the file differ immediately after every commit, so the
+    # staleness check could never pass. The installer records the commit at
+    # install time instead, which is when provenance actually matters.
     return {
-        "generated_from": git_sha(),
         "counts": {
             "skills_installable": len(installable),
             "skills_nested": len([s for s in skills if s["kind"] == "nested"]),

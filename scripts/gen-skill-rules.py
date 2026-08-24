@@ -110,9 +110,11 @@ def build() -> dict:
         if present:
             dir_map[d] = present
 
+    # No commit SHA here, for the same reason catalog.json omits one: the file
+    # is diffed against a fresh regeneration in CI, so it must be byte-stable
+    # across commits.
     return {
         "_generated_by": "scripts/gen-skill-rules.py — do not edit by hand",
-        "_source_commit": catalog.get("generated_from", "unknown"),
         "version": "2.0",
         "config": {
             "minConfidenceScore": 4,
