@@ -1,6 +1,5 @@
 {
   "_generated_by": "scripts/gen-skill-rules.py \u2014 do not edit by hand",
-  "_source_commit": "061a5d738551e9802045c3d63b81956e6c08f82b",
   "version": "2.0",
   "config": {
     "minConfidenceScore": 4,
