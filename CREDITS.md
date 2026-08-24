@@ -34,6 +34,15 @@ The following was created specifically for this repository:
 - **Configuration templates** (templates/) — adapted and annotated from multiple sources
 - **Hook scripts** (hooks/pre-tool-use/, hooks/post-tool-use/) — adapted from multiple sources
 - **README.md** — original design and writing
+- **Installer** (`install.sh`, `scripts/installer_lib.py`) — original
+- **Catalog and validator** (`scripts/catalog.py`, `catalog.json`, `presets.json`) — original
+- **Redaction gate** (`scripts/sanitize.py`) — original, built on `examples/tools/redaction_linter.py`
+- **Bootstrap skill** (`.claude/skills/bootstrap-claude/`) — original
+- **Example configurations** (`examples/`) — contributed from the maintainer's own working
+  machine and project repositories, sanitized before publication. See
+  [`examples/README.md`](examples/README.md) for what is included and what is
+  deliberately excluded.
+- **Guide chapters 10–11** — original documentation
 
 ## License Note
 

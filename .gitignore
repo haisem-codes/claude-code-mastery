@@ -27,3 +27,6 @@ __pycache__/
 *.tmp
 *.bak
 *.log
+
+# Third-party reference repos, cloned on setup (see resources/reference-repos.md)
+references/

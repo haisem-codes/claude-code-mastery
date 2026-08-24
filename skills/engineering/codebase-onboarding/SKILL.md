@@ -1,3 +1,8 @@
+---
+name: codebase-onboarding
+description: Analyze a codebase and generate onboarding documentation: architecture overview, key file map, local setup, common task runbooks, debugging guide and contribution guidelines. Use when joining an unfamiliar repo or writing onboarding docs for new contributors.
+---
+
 # Codebase Onboarding
 
 **Tier:** POWERFUL  

@@ -1,3 +1,8 @@
+---
+name: competitive-teardown
+description: Run a structured competitive analysis from pricing pages, app store reviews, job postings, SEO and social signals, producing feature matrices, SWOT, positioning maps and a UX audit. Use when sizing up a competitor or preparing a positioning review.
+---
+
 # Competitive Teardown
 
 **Tier:** POWERFUL  

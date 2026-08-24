@@ -1,3 +1,8 @@
+---
+name: env-secrets-manager
+description: Manage the .env lifecycle across dev/staging/prod: auto-generate .env.example, validate required vars, detect secret leaks in git history and run credential rotation. Integrates Vault, AWS SSM, 1Password CLI and Doppler. Use when handling env config or after a suspected leak.
+---
+
 # Env & Secrets Manager
 
 **Tier:** POWERFUL

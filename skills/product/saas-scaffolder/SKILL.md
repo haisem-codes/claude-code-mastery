@@ -1,3 +1,8 @@
+---
+name: saas-scaffolder
+description: Scaffold a production-ready SaaS from a product brief: Next.js App Router with TypeScript, Tailwind and shadcn/ui, wired to auth, database, payments and a working dashboard. Use when starting a new SaaS project rather than assembling a starter kit by hand.
+---
+
 # SaaS Scaffolder
 
 **Tier:** POWERFUL  

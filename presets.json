@@ -1,0 +1,159 @@
+{
+  "_comment": "Curated starting points. Each preset names skills by <domain>/<skill> and agents by frontmatter name. Run `python3 scripts/catalog.py --check` after editing; unknown ids fail the install.",
+
+  "backend-python": {
+    "label": "Backend — Python",
+    "description": "FastAPI/Django services: schema design, API review, testing, profiling, secrets.",
+    "skills": [
+      "engineering/api-design-reviewer",
+      "engineering/api-test-suite-builder",
+      "engineering/database-schema-designer",
+      "engineering/dependency-auditor",
+      "engineering/env-secrets-manager",
+      "engineering/performance-profiler",
+      "engineering/pr-review-expert",
+      "reference/fastapi-patterns",
+      "reference/postgres-optimization",
+      "engineering-team/senior-backend",
+      "engineering-team/tdd-guide"
+    ],
+    "agents": ["backend-architect", "python-pro", "debugger", "code-reviewer-pro", "database-optimizer"],
+    "hooks": ["pre-tool-use/block-main-branch", "pre-tool-use/block-dangerous-commands", "pre-tool-use/block-secret-reads"]
+  },
+
+  "frontend-ts": {
+    "label": "Frontend — TypeScript",
+    "description": "React/Next.js work: design systems, landing pages, testing, performance.",
+    "skills": [
+      "engineering/monorepo-navigator",
+      "engineering/performance-profiler",
+      "engineering/pr-review-expert",
+      "product/landing-page-generator",
+      "product/ui-design-system",
+      "anthropic-official/frontend-design",
+      "anthropic-official/webapp-testing",
+      "engineering-team/senior-frontend"
+    ],
+    "agents": ["frontend-developer", "react-pro", "nextjs-pro", "typescript-pro", "ui-designer", "code-reviewer-pro"],
+    "hooks": ["pre-tool-use/block-main-branch", "pre-tool-use/block-dangerous-commands", "post-tool-use/auto-format"]
+  },
+
+  "fullstack": {
+    "label": "Full-stack",
+    "description": "End-to-end product work across API, database, UI and delivery.",
+    "skills": [
+      "engineering/api-design-reviewer",
+      "engineering/api-test-suite-builder",
+      "engineering/database-schema-designer",
+      "engineering/ci-cd-pipeline-builder",
+      "engineering/env-secrets-manager",
+      "engineering/pr-review-expert",
+      "engineering/performance-profiler",
+      "product/saas-scaffolder",
+      "product/ui-design-system",
+      "engineering-team/senior-fullstack",
+      "engineering-team/stripe-integration-expert"
+    ],
+    "agents": ["full-stack-developer", "backend-architect", "frontend-developer", "debugger", "code-reviewer-pro"],
+    "hooks": ["pre-tool-use/block-main-branch", "pre-tool-use/block-dangerous-commands", "pre-tool-use/block-secret-reads"]
+  },
+
+  "devops": {
+    "label": "DevOps / SRE",
+    "description": "Pipelines, observability, incidents, runbooks and migrations.",
+    "skills": [
+      "engineering/ci-cd-pipeline-builder",
+      "engineering/observability-designer",
+      "engineering/runbook-generator",
+      "engineering/migration-architect",
+      "engineering/release-manager",
+      "engineering/dependency-auditor",
+      "engineering/env-secrets-manager",
+      "engineering-team/incident-commander",
+      "engineering-team/senior-devops"
+    ],
+    "agents": ["deployment-engineer", "cloud-architect", "devops-incident-responder", "performance-engineer", "security-auditor"],
+    "hooks": ["pre-tool-use/block-dangerous-commands", "pre-tool-use/block-secret-reads"]
+  },
+
+  "data-ai": {
+    "label": "Data / AI engineering",
+    "description": "RAG pipelines, agent design, model work and data infrastructure.",
+    "skills": [
+      "engineering/rag-architect",
+      "engineering/agent-designer",
+      "engineering/agent-workflow-designer",
+      "engineering/mcp-server-builder",
+      "engineering/database-designer",
+      "engineering-team/senior-ml-engineer",
+      "engineering-team/senior-data-engineer",
+      "engineering-team/senior-prompt-engineer",
+      "anthropic-official/mcp-builder"
+    ],
+    "agents": ["ai-engineer", "ml-engineer", "data-engineer", "data-scientist", "prompt-engineer"],
+    "hooks": ["pre-tool-use/block-main-branch", "pre-tool-use/block-secret-reads"]
+  },
+
+  "mobile": {
+    "label": "Mobile",
+    "description": "React Native and Flutter delivery, store optimization and testing.",
+    "skills": [
+      "engineering/api-test-suite-builder",
+      "engineering/ci-cd-pipeline-builder",
+      "engineering/performance-profiler",
+      "marketing/app-store-optimization",
+      "product/ui-design-system",
+      "engineering-team/senior-frontend"
+    ],
+    "agents": ["mobile-developer", "ui-designer", "qa-expert", "test-automator", "code-reviewer-pro"],
+    "hooks": ["pre-tool-use/block-main-branch", "pre-tool-use/block-dangerous-commands"]
+  },
+
+  "marketing": {
+    "label": "Marketing",
+    "description": "SEO, content, paid acquisition, CRO and lifecycle email.",
+    "skills": [
+      "marketing/seo-audit",
+      "marketing/ai-seo",
+      "marketing/content-strategy",
+      "marketing/copywriting",
+      "marketing/email-sequence",
+      "marketing/paid-ads",
+      "marketing/page-cro",
+      "marketing/analytics-tracking",
+      "marketing/launch-strategy",
+      "marketing/marketing-psychology",
+      "anthropic-official/brand-guidelines"
+    ],
+    "agents": ["product-manager", "documentation-expert"],
+    "hooks": []
+  },
+
+  "exec": {
+    "label": "Executive / founder",
+    "description": "Board prep, strategy, org health and cross-functional advisory.",
+    "skills": [
+      "c-level-advisor/ceo-advisor",
+      "c-level-advisor/cto-advisor",
+      "c-level-advisor/cfo-advisor",
+      "c-level-advisor/board-deck-builder",
+      "c-level-advisor/strategic-alignment",
+      "c-level-advisor/competitive-intel",
+      "c-level-advisor/decision-logger",
+      "c-level-advisor/org-health-diagnostic",
+      "product/competitive-teardown",
+      "anthropic-official/pptx",
+      "anthropic-official/xlsx"
+    ],
+    "agents": ["product-manager"],
+    "hooks": []
+  },
+
+  "minimal": {
+    "label": "Minimal",
+    "description": "Safety hooks and review essentials only. A good first install.",
+    "skills": ["engineering/pr-review-expert", "engineering/codebase-onboarding"],
+    "agents": ["code-reviewer-pro", "debugger"],
+    "hooks": ["pre-tool-use/block-main-branch", "pre-tool-use/block-dangerous-commands", "pre-tool-use/block-secret-reads"]
+  }
+}

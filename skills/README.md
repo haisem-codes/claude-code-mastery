@@ -1,23 +1,40 @@
 # Skill Catalog
 
-193 skills across 11 domains, ready to install.
+168 installable skills across 11 domains, plus 20 sub-skills bundled inside
+their parent. Counts are generated into [`catalog.json`](../catalog.json).
 
 ## Installation
 
-Copy any skill or entire domain to your global skills directory:
+Use the installer. It resolves paths from the catalog, handles name collisions
+between domains, and records what it installed so it can be undone:
 
 ```bash
-# Single skill
-cp -r skills/engineering/code-review ~/.claude/skills/
+./install.sh --skills engineering/pr-review-expert,reference/fastapi-patterns
+./install.sh --preset backend-python          # a curated bundle
+./install.sh --list                           # see all presets
+```
 
-# Entire domain
+### Copying by hand
+
+Claude Code expects a **flat** skills directory — `~/.claude/skills/<name>/SKILL.md`.
+The layout in this repo is one level deeper (`skills/<domain>/<name>/SKILL.md`),
+so copy the skill directory itself, never the domain directory:
+
+```bash
+# correct — the skill directory lands directly under skills/
+cp -r skills/engineering/pr-review-expert ~/.claude/skills/
+
+# WRONG — produces ~/.claude/skills/engineering/<name>/SKILL.md,
+# which is one level too deep and will never be discovered
 cp -r skills/engineering ~/.claude/skills/
-
-# All skills
 cp -r skills/* ~/.claude/skills/
 ```
 
-Skills are recognized automatically after copying — no restart required.
+Two skills share the name `brand-guidelines` (in `anthropic-official/` and
+`marketing/`). Installing both by hand means one overwrites the other; the
+installer prefixes them instead.
+
+Restart Claude Code after installing — skills are read at startup.
 
 ## Domains
 

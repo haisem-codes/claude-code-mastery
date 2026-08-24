@@ -1,0 +1,130 @@
+{
+  "_comment": "Upstream repositories worth reading alongside this one. Fetched on demand by scripts/fetch-references.sh into references/ (gitignored) — never vendored, so they stay current and their licenses stay theirs. Sizes are upstream repo size as reported by the GitHub API; a --depth 1 clone is usually much smaller.",
+  "_updated": "2026-08-24",
+
+  "repos": [
+    {
+      "slug": "alirezarezvani/claude-skills",
+      "name": "claude-skills",
+      "category": "skill-library",
+      "license": "MIT",
+      "size_mb": 21,
+      "default": true,
+      "sourced_from": true,
+      "why": "The origin of 149 of this repo's 168 skills. Read it for the full upstream set, which is larger and updated more often than the snapshot here.",
+      "description": "345+ skills, 30+ agents and 70+ commands across engineering, marketing, product, compliance and C-level advisory."
+    },
+    {
+      "slug": "anthropics/skills",
+      "name": "anthropic-skills",
+      "category": "skill-library",
+      "license": "NOASSERTION",
+      "license_note": "Each skill carries its own LICENSE.txt. Not MIT — check before redistributing.",
+      "size_mb": 4,
+      "default": true,
+      "sourced_from": true,
+      "why": "Anthropic's own skills, and the reference for how a skill should be structured. The 16 under skills/anthropic-official/ come from here.",
+      "description": "Official Agent Skills: pdf, docx, xlsx, pptx, skill-creator, frontend-design, mcp-builder and more."
+    },
+    {
+      "slug": "trailofbits/claude-code-config",
+      "name": "claude-code-config",
+      "category": "config-example",
+      "license": "NOASSERTION",
+      "size_mb": 1,
+      "default": true,
+      "sourced_from": true,
+      "why": "The security-first end of the spectrum. Its permission deny-list patterns are the basis for the ones in templates/global/settings.json.",
+      "description": "Trail of Bits' opinionated Claude Code defaults, documentation and workflows."
+    },
+    {
+      "slug": "ChrisWiles/claude-code-showcase",
+      "name": "claude-code-showcase",
+      "category": "config-example",
+      "license": "NOASSERTION",
+      "size_mb": 1,
+      "default": true,
+      "sourced_from": true,
+      "why": "Source of the skill-eval hook system and the GitHub Actions workflows in this repo. Worth reading end to end as a complete project config.",
+      "description": "A full project configuration example: hooks, skills, agents, commands and CI workflows."
+    },
+    {
+      "slug": "feiskyer/claude-code-settings",
+      "name": "claude-code-settings",
+      "category": "skill-library",
+      "license": "MIT",
+      "size_mb": 1,
+      "default": true,
+      "sourced_from": false,
+      "why": "Compact and well-organised. A good model for how to lay out commands and agents without the volume of the larger collections.",
+      "description": "Curated skills, sub-agents and config templates — research, image generation, GitHub automation."
+    },
+    {
+      "slug": "hesreallyhim/awesome-claude-code",
+      "name": "awesome-claude-code",
+      "category": "curated-list",
+      "license": "NOASSERTION",
+      "size_mb": 34,
+      "default": true,
+      "sourced_from": false,
+      "why": "The broadest index of the ecosystem — skills, agents, status lines, tooling, plugins. Start here when looking for something that is not in this repo.",
+      "description": "Hand-picked collection of Claude Code resources."
+    },
+    {
+      "slug": "ComposioHQ/awesome-claude-skills",
+      "name": "composio-awesome-skills",
+      "category": "curated-list",
+      "license": "NOASSERTION",
+      "size_mb": 3,
+      "default": false,
+      "sourced_from": false,
+      "why": "Strong on app-integration skill patterns — how a skill wraps a third-party API cleanly.",
+      "description": "Curated Claude Skills, resources and tools for customizing Claude workflows."
+    },
+    {
+      "slug": "travisvn/awesome-claude-skills",
+      "name": "travisvn-awesome-skills",
+      "category": "curated-list",
+      "license": "NOASSERTION",
+      "size_mb": 1,
+      "default": false,
+      "sourced_from": false,
+      "why": "Smaller and more Claude Code-specific than the other lists.",
+      "description": "Curated Claude Skills, focused on Claude Code."
+    },
+    {
+      "slug": "BehiSecc/awesome-claude-skills",
+      "name": "behisecc-awesome-skills",
+      "category": "curated-list",
+      "license": "NOASSERTION",
+      "size_mb": 1,
+      "default": false,
+      "sourced_from": false,
+      "why": "Another skills index. Overlaps the two above; clone it if you are surveying comprehensively.",
+      "description": "A curated list of Claude Skills."
+    },
+    {
+      "slug": "pvillega/claude-templates",
+      "name": "claude-templates",
+      "category": "config-example",
+      "license": "NOASSERTION",
+      "size_mb": 1,
+      "default": false,
+      "sourced_from": false,
+      "why": "Small and readable. Useful if the larger template sets are more structure than you want.",
+      "description": "Templates for new Claude repositories."
+    },
+    {
+      "slug": "davila7/claude-code-templates",
+      "name": "claude-code-templates",
+      "category": "tooling",
+      "license": "MIT",
+      "size_mb": 219,
+      "default": false,
+      "size_warning": true,
+      "sourced_from": false,
+      "why": "A CLI that configures and monitors Claude Code — a different approach to the same problem this repo's install.sh solves. Large: 219 MB upstream, so it is opt-in.",
+      "description": "CLI tool for configuring and monitoring Claude Code."
+    }
+  ]
+}

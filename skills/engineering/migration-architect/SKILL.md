@@ -1,3 +1,8 @@
+---
+name: migration-architect
+description: Plan, execute and validate complex system migrations with minimal downtime: strategy planning, compatibility analysis and rollback design. Use when moving between databases, infrastructure or major framework versions.
+---
+
 # Migration Architect
 
 **Tier:** POWERFUL  

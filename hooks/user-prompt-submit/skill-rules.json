@@ -1,10 +1,11 @@
 {
-  "$schema": "./skill-rules.schema.json",
+  "_generated_by": "scripts/gen-skill-rules.py \u2014 do not edit by hand",
+  "_source_commit": "061a5d738551e9802045c3d63b81956e6c08f82b",
   "version": "2.0",
   "config": {
-    "minConfidenceScore": 3,
+    "minConfidenceScore": 4,
     "showMatchReasons": true,
-    "maxSkillsToShow": 5
+    "maxSkillsToShow": 4
   },
   "scoring": {
     "keyword": 2,
@@ -16,307 +17,4893 @@
     "contextPattern": 2
   },
   "directoryMappings": {
-    "src/components/core": "core-components",
-    "src/components": "core-components",
-    "src/screens": "navigation-architecture",
-    "src/navigation": "navigation-architecture",
-    "src/hooks": "react-ui-patterns",
-    "src/graphql": "graphql-schema",
-    "src/localization": "i18n-translations",
-    "src/state": "state-management",
-    "src/contexts": "state-management",
-    ".maestro": "maestro-e2e",
-    ".github/workflows": "github-actions",
-    "src/utils/sentry": "analytics-tracking",
-    "src/datadog": "analytics-tracking"
+    "migrations": [
+      "database-schema-designer",
+      "migration-architect"
+    ],
+    "tests": [
+      "api-test-suite-builder",
+      "tdd-guide"
+    ],
+    "test": [
+      "api-test-suite-builder",
+      "tdd-guide"
+    ],
+    ".github/workflows": [
+      "ci-cd-pipeline-builder",
+      "release-manager"
+    ],
+    "terraform": [
+      "runbook-generator",
+      "observability-designer"
+    ],
+    "k8s": [
+      "runbook-generator",
+      "observability-designer"
+    ],
+    "docs": [
+      "codebase-onboarding",
+      "runbook-generator"
+    ]
   },
   "skills": {
-    "storybook": {
-      "description": "Storybook story creation patterns",
-      "priority": 8,
+    "algorithmic-art": {
+      "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generati",
+      "priority": 5,
+      "domain": "anthropic-official",
       "triggers": {
-        "keywords": ["storybook", "stories", "story"],
-        "keywordPatterns": ["\\bstory\\b", "\\.stories\\b"],
-        "pathPatterns": ["**/*.stories.tsx", "**/stories/**"],
-        "intentPatterns": [
-          "(?:create|add|write|build|make).*(?:stor(?:y|ies))",
-          "(?:stor(?:y|ies)).*(?:for|of)"
+        "keywords": [
+          "algorithmic",
+          "art",
+          "p5.js",
+          "seeded",
+          "randomness",
+          "interactive",
+          "parameter",
+          "exploration",
+          "users",
+          "request",
+          "generative",
+          "flow"
         ],
-        "contentPatterns": ["ComponentMeta", "StoryObj", "@storybook"]
-      },
-      "relatedSkills": ["core-components"]
-    },
-    "testing-patterns": {
-      "description": "Jest testing patterns and TDD workflow",
-      "priority": 9,
-      "triggers": {
-        "keywords": ["test", "jest", "spec", "tdd", "mock", "factory"],
-        "keywordPatterns": ["\\btest(?:s|ing)?\\b", "\\bspec\\b", "unit test"],
-        "pathPatterns": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/test-utils/**", "**/__mocks__/**"],
-        "intentPatterns": [
-          "(?:write|add|create|fix).*(?:test|spec)",
-          "(?:test|spec).*(?:for|of|the)",
-          "(?:red.green.refactor|tdd)"
+        "keywordPatterns": [
+          "\\balgorithmic\\-art\\b",
+          "\\balgorithmic\\ art\\b"
         ],
-        "contentPatterns": ["describe\\(", "it\\(", "expect\\(", "jest\\.mock", "getMock"]
-      },
-      "excludePatterns": ["e2e", "maestro", "end-to-end"]
-    },
-    "formik-patterns": {
-      "description": "Formik form handling with validation",
-      "priority": 7,
-      "triggers": {
-        "keywords": ["form", "formik", "validation", "yup", "input field"],
-        "keywordPatterns": ["\\bform(?:s)?\\b", "Form\\b", "\\bvalidat(?:e|ion)\\b"],
-        "pathPatterns": ["**/*Form.tsx", "**/*Form/**", "**/forms/**"],
         "intentPatterns": [
-          "(?:create|build|add).*(?:form)",
-          "(?:form).*(?:validation|submit|field)",
-          "(?:validat(?:e|ion)).*(?:schema|rule)"
-        ],
-        "contentPatterns": ["useFormik", "Formik", "FormikProvider", "yup\\."]
-      },
-      "excludePatterns": ["format", "transform", "platform"]
-    },
-    "graphql-schema": {
-      "description": "GraphQL queries, mutations, and code generation",
-      "priority": 8,
-      "triggers": {
-        "keywords": ["graphql", "query", "mutation", "gql", "apollo", "fragment"],
-        "keywordPatterns": ["\\bgql\\b", "\\bquery\\b", "\\bmutation\\b", "graphql"],
-        "pathPatterns": ["**/*.gql", "**/graphql/**", "**/*.generated.ts"],
-        "intentPatterns": [
-          "(?:create|add|write).*(?:query|mutation|fragment)",
-          "(?:fetch|get|load).*(?:data|from api)",
-          "(?:graphql).*(?:hook|type)"
-        ],
-        "contentPatterns": ["gql`", "useQuery", "useMutation", "useLazyQuery"]
-      },
-      "relatedSkills": ["react-ui-patterns"]
-    },
-    "navigation-architecture": {
-      "description": "React Navigation patterns and deep linking",
-      "priority": 7,
-      "triggers": {
-        "keywords": ["navigation", "navigate", "screen", "route", "stack", "tab", "drawer", "deep link"],
-        "keywordPatterns": ["\\bscreen\\b", "\\bnavigate\\b", "\\broute\\b"],
-        "pathPatterns": ["**/navigation/**", "**/screens/**", "**/*Screen.tsx", "**/*Stack.tsx"],
-        "intentPatterns": [
-          "(?:add|create|new).*(?:screen)",
-          "(?:navigate|go).*(?:to|back)",
-          "(?:screen).*(?:param|prop)"
-        ],
-        "contentPatterns": ["useNavigation", "navigation\\.navigate", "createStackNavigator", "RootStackParamList"]
-      }
-    },
-    "i18n-translations": {
-      "description": "Internationalization and translation patterns",
-      "priority": 6,
-      "triggers": {
-        "keywords": ["translation", "i18n", "localization", "translate", "t("],
-        "keywordPatterns": ["\\bt\\(", "\\bi18n\\b", "translat"],
-        "pathPatterns": ["**/localization/**", "**/en/**/*.json", "**/i18n/**"],
-        "intentPatterns": [
-          "(?:add|create).*(?:translation|text)",
-          "(?:translat).*(?:key|string)"
-        ],
-        "contentPatterns": ["useTranslation", "t\\(", "i18next"]
-      }
-    },
-    "core-components": {
-      "description": "Core component library and design system",
-      "priority": 7,
-      "triggers": {
-        "keywords": ["component", "ui", "button", "text", "box", "hstack", "vstack", "token"],
-        "keywordPatterns": ["\\bcomponent\\b", "\\$[a-z]+\\d*"],
-        "pathPatterns": ["**/components/core/**", "**/components/**/*.tsx"],
-        "intentPatterns": [
-          "(?:create|build|add).*(?:component)",
-          "(?:style|design).*(?:component|ui)"
-        ],
-        "contentPatterns": ["from 'components/core", "Box", "HStack", "VStack", "Text"]
-      },
-      "excludePatterns": ["storybook", "test"]
-    },
-    "systematic-debugging": {
-      "description": "Four-phase debugging with root cause analysis",
-      "priority": 9,
-      "triggers": {
-        "keywords": ["bug", "debug", "fix", "error", "issue", "broken", "crash", "failing"],
-        "keywordPatterns": ["\\bbug\\b", "\\bfix\\b", "\\berror\\b", "\\bissue\\b", "doesn't work", "not working"],
-        "intentPatterns": [
-          "(?:fix|debug|resolve|investigate).*(?:bug|error|issue|problem)",
-          "(?:why).*(?:not working|broken|failing|crash)",
-          "(?:something).*(?:wrong|broken)"
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:algorithmic|art)\\b"
         ]
-      },
-      "excludePatterns": ["fix typo", "fix formatting", "fix lint"]
+      }
     },
-    "state-management": {
-      "description": "Redux Toolkit, Jotai, Apollo Client state patterns",
-      "priority": 6,
+    "brand-guidelines": {
+      "description": "When the user wants to apply, document, or enforce brand guidelines for any product or company. Also use when the user mentions 'brand guidelines,' 'brand color",
+      "priority": 5,
+      "domain": "marketing",
       "triggers": {
-        "keywords": ["state", "redux", "jotai", "atom", "store", "slice", "context", "provider"],
-        "keywordPatterns": ["\\bstate\\b", "\\bredux\\b", "\\batom\\b", "\\bstore\\b"],
-        "pathPatterns": ["**/state/**", "**/store/**", "**/contexts/**", "**/*Atom.ts", "**/*Slice.ts"],
-        "intentPatterns": [
-          "(?:manage|handle).*(?:state)",
-          "(?:create|add).*(?:atom|slice|context)"
+        "keywords": [
+          "brand",
+          "guidelines",
+          "user",
+          "apply",
+          "document",
+          "enforce",
+          "product",
+          "company",
+          "mentions",
+          "colors",
+          "typography",
+          "logo"
         ],
-        "contentPatterns": ["useAtom", "useSelector", "createSlice", "atom\\("]
-      },
-      "excludePatterns": ["state of", "current state", "error state"]
+        "keywordPatterns": [
+          "\\bbrand\\-guidelines\\b",
+          "\\bbrand\\ guidelines\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:brand|guidelines)\\b"
+        ]
+      }
     },
-    "github-actions": {
-      "description": "GitHub Actions CI/CD workflow patterns",
-      "priority": 6,
+    "canvas-design": {
+      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, d",
+      "priority": 5,
+      "domain": "anthropic-official",
       "triggers": {
-        "keywords": ["github action", "github workflow", "workflow", "ci/cd", "cicd", "pipeline", "ci", "cd"],
-        "keywordPatterns": ["github.action", "ci/?cd", "\\bworkflow\\b"],
-        "pathPatterns": [".github/workflows/**", ".github/**/*.yml", ".github/**/*.yaml"],
-        "intentPatterns": [
-          "(?:create|add|update).*(?:workflow|action|pipeline)",
-          "(?:ci|cd).*(?:pipeline|workflow)"
+        "keywords": [
+          "canvas",
+          "beautiful",
+          "visual",
+          "art",
+          "png",
+          "pdf",
+          "documents",
+          "philosophy",
+          "should",
+          "user",
+          "asks",
+          "poster",
+          "piece"
         ],
-        "contentPatterns": ["runs-on:", "uses:", "steps:"]
+        "keywordPatterns": [
+          "\\bcanvas\\-design\\b",
+          "\\bcanvas\\ design\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:canvas)\\b"
+        ]
+      }
+    },
+    "doc-coauthoring": {
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs,",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "doc",
+          "coauthoring",
+          "guide",
+          "users",
+          "through",
+          "structured",
+          "workflow",
+          "co-authoring",
+          "documentation",
+          "user",
+          "proposals",
+          "technical",
+          "specs",
+          "decision"
+        ],
+        "keywordPatterns": [
+          "\\bdoc\\-coauthoring\\b",
+          "\\bdoc\\ coauthoring\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:doc|coauthoring)\\b"
+        ]
+      }
+    },
+    "docx": {
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of \\\"Word doc\\\", \\\"word ",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "docx",
+          "whenever",
+          "user",
+          "read",
+          "edit",
+          "manipulate",
+          "word",
+          "documents",
+          "triggers",
+          "mention",
+          "doc",
+          "document"
+        ],
+        "keywordPatterns": [
+          "\\bdocx\\b",
+          "\\bdocx\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:docx)\\b"
+        ]
+      }
+    },
+    "frontend-design": {
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, ",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "frontend",
+          "distinctive",
+          "production-grade",
+          "interfaces",
+          "high",
+          "quality",
+          "user",
+          "asks",
+          "web",
+          "components",
+          "pages",
+          "artifacts"
+        ],
+        "keywordPatterns": [
+          "\\bfrontend\\-design\\b",
+          "\\bfrontend\\ design\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:frontend)\\b"
+        ]
+      }
+    },
+    "internal-comms": {
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever ",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "internal",
+          "comms",
+          "resources",
+          "kinds",
+          "communications",
+          "formats",
+          "company",
+          "likes",
+          "claude",
+          "should",
+          "whenever",
+          "asked",
+          "sort"
+        ],
+        "keywordPatterns": [
+          "\\binternal\\-comms\\b",
+          "\\binternal\\ comms\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:internal|comms)\\b"
+        ]
+      }
+    },
+    "mcp-builder": {
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when b",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "mcp",
+          "builder",
+          "guide",
+          "high-quality",
+          "model",
+          "context",
+          "protocol",
+          "servers",
+          "enable",
+          "llms",
+          "interact",
+          "external",
+          "services"
+        ],
+        "keywordPatterns": [
+          "\\bmcp\\-builder\\b",
+          "\\bmcp\\ builder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:mcp|builder)\\b"
+        ]
+      }
+    },
+    "pdf": {
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple P",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "pdf",
+          "whenever",
+          "user",
+          "anything",
+          "reading",
+          "extracting",
+          "text",
+          "tables",
+          "pdfs",
+          "combining",
+          "merging",
+          "multiple"
+        ],
+        "keywordPatterns": [
+          "\\bpdf\\b",
+          "\\bpdf\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:pdf)\\b"
+        ]
+      }
+    },
+    "pptx": {
+      "description": "Use this skill any time a .pptx file is involved in any way \u2014 as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; rea",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "pptx",
+          "involved",
+          "way",
+          "input",
+          "both",
+          "slide",
+          "decks",
+          "pitch",
+          "presentations",
+          "reading",
+          "parsing",
+          "extracting"
+        ],
+        "keywordPatterns": [
+          "\\bpptx\\b",
+          "\\bpptx\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:pptx)\\b"
+        ]
+      }
+    },
+    "skill-creator": {
+      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabil",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "creator",
+          "guide",
+          "effective",
+          "should",
+          "users",
+          "update",
+          "existing",
+          "extends",
+          "claude",
+          "capabilities",
+          "specialized",
+          "knowledge",
+          "workflows"
+        ],
+        "keywordPatterns": [
+          "\\bskill\\-creator\\b",
+          "\\bskill\\ creator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:creator)\\b"
+        ]
+      }
+    },
+    "slack-gif-creator": {
+      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request a",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "slack",
+          "gif",
+          "creator",
+          "knowledge",
+          "utilities",
+          "animated",
+          "gifs",
+          "optimized",
+          "provides",
+          "constraints",
+          "validation",
+          "tools",
+          "animation",
+          "concepts"
+        ],
+        "keywordPatterns": [
+          "\\bslack\\-gif\\-creator\\b",
+          "\\bslack\\ gif\\ creator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:slack|gif|creator)\\b"
+        ]
+      }
+    },
+    "theme-factory": {
+      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fo",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "theme",
+          "factory",
+          "toolkit",
+          "styling",
+          "artifacts",
+          "these",
+          "slides",
+          "docs",
+          "reportings",
+          "html",
+          "landing",
+          "pages",
+          "etc"
+        ],
+        "keywordPatterns": [
+          "\\btheme\\-factory\\b",
+          "\\btheme\\ factory\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:theme|factory)\\b"
+        ]
+      }
+    },
+    "web-artifacts-builder": {
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "web",
+          "artifacts",
+          "builder",
+          "suite",
+          "tools",
+          "elaborate",
+          "multi-component",
+          "claude.ai",
+          "html",
+          "modern",
+          "frontend",
+          "technologies",
+          "react"
+        ],
+        "keywordPatterns": [
+          "\\bweb\\-artifacts\\-builder\\b",
+          "\\bweb\\ artifacts\\ builder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:web|artifacts|builder)\\b"
+        ]
+      }
+    },
+    "webapp-testing": {
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing br",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "webapp",
+          "testing",
+          "toolkit",
+          "interacting",
+          "local",
+          "web",
+          "applications",
+          "playwright",
+          "supports",
+          "verifying",
+          "frontend",
+          "functionality",
+          "debugging"
+        ],
+        "keywordPatterns": [
+          "\\bwebapp\\-testing\\b",
+          "\\bwebapp\\ testing\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:webapp|testing)\\b"
+        ]
+      }
+    },
+    "xlsx": {
+      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xl",
+      "priority": 5,
+      "domain": "anthropic-official",
+      "triggers": {
+        "keywords": [
+          "xlsx",
+          "spreadsheet",
+          "primary",
+          "input",
+          "means",
+          "task",
+          "user",
+          "open",
+          "read",
+          "edit",
+          "fix",
+          "existing"
+        ],
+        "keywordPatterns": [
+          "\\bxlsx\\b",
+          "\\bxlsx\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:xlsx)\\b"
+        ]
+      }
+    },
+    "contract-and-proposal-writer": {
+      "description": "Generate freelance contracts, project proposals, SOWs, NDAs and MSAs as structured Markdown with jurisdiction-aware clauses for US, EU, UK and DACH. Use when dr",
+      "priority": 5,
+      "domain": "business-growth",
+      "triggers": {
+        "keywords": [
+          "contract",
+          "proposal",
+          "writer",
+          "freelance",
+          "contracts",
+          "proposals",
+          "sows",
+          "ndas",
+          "msas",
+          "structured",
+          "markdown",
+          "jurisdiction-aware",
+          "clauses",
+          "dach"
+        ],
+        "keywordPatterns": [
+          "\\bcontract\\-and\\-proposal\\-writer\\b",
+          "\\bcontract\\ and\\ proposal\\ writer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:contract|proposal|writer)\\b"
+        ]
+      }
+    },
+    "customer-success-manager": {
+      "description": "Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success",
+      "priority": 5,
+      "domain": "business-growth",
+      "triggers": {
+        "keywords": [
+          "customer",
+          "success",
+          "manager",
+          "monitors",
+          "health",
+          "predicts",
+          "churn",
+          "risk",
+          "identifies",
+          "expansion",
+          "opportunities",
+          "weighted",
+          "scoring",
+          "models"
+        ],
+        "keywordPatterns": [
+          "\\bcustomer\\-success\\-manager\\b",
+          "\\bcustomer\\ success\\ manager\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:customer|success|manager)\\b"
+        ]
+      }
+    },
+    "revenue-operations": {
+      "description": "Analyzes pipeline coverage, tracks forecast accuracy with MAPE, and calculates GTM efficiency metrics for SaaS revenue optimization",
+      "priority": 5,
+      "domain": "business-growth",
+      "triggers": {
+        "keywords": [
+          "revenue",
+          "operations",
+          "analyzes",
+          "pipeline",
+          "coverage",
+          "tracks",
+          "forecast",
+          "accuracy",
+          "mape",
+          "calculates",
+          "gtm",
+          "efficiency",
+          "metrics",
+          "saas"
+        ],
+        "keywordPatterns": [
+          "\\brevenue\\-operations\\b",
+          "\\brevenue\\ operations\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:revenue|operations)\\b"
+        ]
+      }
+    },
+    "sales-engineer": {
+      "description": "Analyzes RFP responses for coverage gaps, builds competitive feature matrices, and plans proof-of-concept engagements for pre-sales engineering",
+      "priority": 5,
+      "domain": "business-growth",
+      "triggers": {
+        "keywords": [
+          "sales",
+          "engineer",
+          "analyzes",
+          "rfp",
+          "responses",
+          "coverage",
+          "gaps",
+          "competitive",
+          "feature",
+          "matrices",
+          "plans",
+          "proof-of-concept",
+          "engagements",
+          "pre-sales"
+        ],
+        "keywordPatterns": [
+          "\\bsales\\-engineer\\b",
+          "\\bsales\\ engineer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:sales|engineer)\\b"
+        ]
+      }
+    },
+    "agent-protocol": {
+      "description": "Inter-agent communication protocol for C-suite agent teams. Defines invocation syntax, loop prevention, isolation rules, and response formats. Use when C-suite ",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "agent",
+          "protocol",
+          "inter-agent",
+          "communication",
+          "c-suite",
+          "defines",
+          "invocation",
+          "syntax",
+          "loop",
+          "prevention",
+          "isolation",
+          "rules"
+        ],
+        "keywordPatterns": [
+          "\\bagent\\-protocol\\b",
+          "\\bagent\\ protocol\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:agent|protocol)\\b"
+        ]
+      }
+    },
+    "board-deck-builder": {
+      "description": "Assembles comprehensive board and investor update decks by pulling perspectives from all C-suite roles. Use when preparing board meetings, investor updates, qua",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "board",
+          "deck",
+          "builder",
+          "assembles",
+          "comprehensive",
+          "investor",
+          "update",
+          "decks",
+          "pulling",
+          "perspectives",
+          "c-suite",
+          "roles",
+          "preparing",
+          "meetings"
+        ],
+        "keywordPatterns": [
+          "\\bboard\\-deck\\-builder\\b",
+          "\\bboard\\ deck\\ builder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:board|deck|builder)\\b"
+        ]
+      }
+    },
+    "board-meeting": {
+      "description": "Multi-agent board meeting protocol for strategic decisions. Runs a structured 6-phase deliberation: context loading, independent C-suite contributions (isolated",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "board",
+          "meeting",
+          "multi-agent",
+          "protocol",
+          "strategic",
+          "decisions",
+          "structured",
+          "phase",
+          "deliberation",
+          "context",
+          "loading",
+          "independent"
+        ],
+        "keywordPatterns": [
+          "\\bboard\\-meeting\\b",
+          "\\bboard\\ meeting\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:board|meeting)\\b"
+        ]
+      }
+    },
+    "ceo-advisor": {
+      "description": "Executive leadership guidance for strategic decision-making, organizational development, and stakeholder management. Use when planning strategy, preparing board",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "ceo",
+          "advisor",
+          "executive",
+          "leadership",
+          "guidance",
+          "strategic",
+          "decision-making",
+          "organizational",
+          "development",
+          "stakeholder",
+          "management",
+          "planning",
+          "strategy",
+          "preparing"
+        ],
+        "keywordPatterns": [
+          "\\bceo\\-advisor\\b",
+          "\\bceo\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:ceo|advisor)\\b"
+        ]
+      }
+    },
+    "cfo-advisor": {
+      "description": "Financial leadership for startups and scaling companies. Financial modeling, unit economics, fundraising strategy, cash management, and board financial packages",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "cfo",
+          "advisor",
+          "financial",
+          "leadership",
+          "startups",
+          "scaling",
+          "companies",
+          "modeling",
+          "unit",
+          "economics",
+          "fundraising",
+          "strategy",
+          "cash",
+          "management"
+        ],
+        "keywordPatterns": [
+          "\\bcfo\\-advisor\\b",
+          "\\bcfo\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:cfo|advisor)\\b"
+        ]
+      }
+    },
+    "change-management": {
+      "description": "Framework for rolling out organizational changes without chaos. Covers the ADKAR model adapted for startups, communication templates, resistance patterns, and c",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "change",
+          "management",
+          "framework",
+          "rolling",
+          "out",
+          "organizational",
+          "changes",
+          "without",
+          "chaos",
+          "adkar",
+          "model",
+          "adapted",
+          "startups",
+          "communication"
+        ],
+        "keywordPatterns": [
+          "\\bchange\\-management\\b",
+          "\\bchange\\ management\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:change|management)\\b"
+        ]
+      }
+    },
+    "chief-of-staff": {
+      "description": "C-suite orchestration layer. Routes founder questions to the right advisor role(s), triggers multi-role board meetings for complex decisions, synthesizes output",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "chief",
+          "staff",
+          "c-suite",
+          "orchestration",
+          "layer",
+          "routes",
+          "founder",
+          "questions",
+          "right",
+          "advisor",
+          "role",
+          "triggers",
+          "multi-role",
+          "board"
+        ],
+        "keywordPatterns": [
+          "\\bchief\\-of\\-staff\\b",
+          "\\bchief\\ of\\ staff\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:chief|staff)\\b"
+        ]
+      }
+    },
+    "chro-advisor": {
+      "description": "People leadership for scaling companies. Hiring strategy, compensation design, org structure, culture, and retention. Use when building hiring plans, designing ",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "chro",
+          "advisor",
+          "people",
+          "leadership",
+          "scaling",
+          "companies",
+          "hiring",
+          "strategy",
+          "compensation",
+          "org",
+          "structure",
+          "culture",
+          "retention",
+          "plans"
+        ],
+        "keywordPatterns": [
+          "\\bchro\\-advisor\\b",
+          "\\bchro\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:chro|advisor)\\b"
+        ]
+      }
+    },
+    "ciso-advisor": {
+      "description": "Security leadership for growth-stage companies. Risk quantification in dollars, compliance roadmap (SOC 2/ISO 27001/HIPAA/GDPR), security architecture strategy,",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "ciso",
+          "advisor",
+          "security",
+          "leadership",
+          "growth-stage",
+          "companies",
+          "risk",
+          "quantification",
+          "dollars",
+          "compliance",
+          "roadmap",
+          "soc",
+          "iso",
+          "hipaa"
+        ],
+        "keywordPatterns": [
+          "\\bciso\\-advisor\\b",
+          "\\bciso\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:ciso|advisor)\\b"
+        ]
+      }
+    },
+    "cmo-advisor": {
+      "description": "Marketing leadership for scaling companies. Brand positioning, growth model design, marketing budget allocation, and marketing org design. Use when designing br",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "cmo",
+          "advisor",
+          "marketing",
+          "leadership",
+          "scaling",
+          "companies",
+          "brand",
+          "positioning",
+          "growth",
+          "model",
+          "budget",
+          "allocation",
+          "org",
+          "strategy"
+        ],
+        "keywordPatterns": [
+          "\\bcmo\\-advisor\\b",
+          "\\bcmo\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:cmo|advisor)\\b"
+        ]
+      }
+    },
+    "company-os": {
+      "description": "The meta-framework for how a company runs \u2014 the connective tissue between all C-suite roles. Covers operating system selection (EOS, Scaling Up, OKR-native, hyb",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "company",
+          "meta-framework",
+          "connective",
+          "tissue",
+          "between",
+          "c-suite",
+          "roles",
+          "operating",
+          "system",
+          "selection",
+          "eos",
+          "scaling"
+        ],
+        "keywordPatterns": [
+          "\\bcompany\\-os\\b",
+          "\\bcompany\\ os\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:company)\\b"
+        ]
+      }
+    },
+    "competitive-intel": {
+      "description": "Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Use when analyzing competitors, building sales battlecard",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "competitive",
+          "intel",
+          "systematic",
+          "competitor",
+          "tracking",
+          "feeds",
+          "cmo",
+          "positioning",
+          "cro",
+          "battlecards",
+          "cpo",
+          "roadmap",
+          "decisions",
+          "analyzing"
+        ],
+        "keywordPatterns": [
+          "\\bcompetitive\\-intel\\b",
+          "\\bcompetitive\\ intel\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:competitive|intel)\\b"
+        ]
+      }
+    },
+    "context-engine": {
+      "description": "Loads and manages company context for all C-suite advisor skills. Reads ~/.claude/company-context.md, detects stale context (>90 days), enriches context during ",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "context",
+          "engine",
+          "loads",
+          "company",
+          "c-suite",
+          "advisor",
+          "reads",
+          "claude",
+          "company-context.md",
+          "detects",
+          "stale",
+          "days",
+          "enriches"
+        ],
+        "keywordPatterns": [
+          "\\bcontext\\-engine\\b",
+          "\\bcontext\\ engine\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:context|engine)\\b"
+        ]
+      }
+    },
+    "coo-advisor": {
+      "description": "Operations leadership for scaling companies. Process design, OKR execution, operational cadence, and scaling playbooks. Use when designing operations, setting u",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "coo",
+          "advisor",
+          "operations",
+          "leadership",
+          "scaling",
+          "companies",
+          "process",
+          "okr",
+          "execution",
+          "operational",
+          "cadence",
+          "playbooks",
+          "setting",
+          "okrs"
+        ],
+        "keywordPatterns": [
+          "\\bcoo\\-advisor\\b",
+          "\\bcoo\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:coo|advisor)\\b"
+        ]
+      }
+    },
+    "cpo-advisor": {
+      "description": "Product leadership for scaling companies. Product vision, portfolio strategy, product-market fit, and product org design. Use when setting product vision, manag",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "cpo",
+          "advisor",
+          "product",
+          "leadership",
+          "scaling",
+          "companies",
+          "vision",
+          "portfolio",
+          "strategy",
+          "product-market",
+          "fit",
+          "org",
+          "setting",
+          "measuring"
+        ],
+        "keywordPatterns": [
+          "\\bcpo\\-advisor\\b",
+          "\\bcpo\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:cpo|advisor)\\b"
+        ]
+      }
+    },
+    "cro-advisor": {
+      "description": "Revenue leadership for B2B SaaS companies. Revenue forecasting, sales model design, pricing strategy, net revenue retention, and sales team scaling. Use when de",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "cro",
+          "advisor",
+          "revenue",
+          "leadership",
+          "b2b",
+          "saas",
+          "companies",
+          "forecasting",
+          "sales",
+          "model",
+          "pricing",
+          "strategy",
+          "net",
+          "retention"
+        ],
+        "keywordPatterns": [
+          "\\bcro\\-advisor\\b",
+          "\\bcro\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:cro|advisor)\\b"
+        ]
+      }
+    },
+    "cs-onboard": {
+      "description": "Founder onboarding interview that captures company context across 7 dimensions. Invoke with /cs:setup for initial interview or /cs:update for quarterly refresh.",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "onboard",
+          "founder",
+          "onboarding",
+          "interview",
+          "captures",
+          "company",
+          "context",
+          "dimensions",
+          "invoke",
+          "setup",
+          "initial",
+          "update",
+          "quarterly"
+        ],
+        "keywordPatterns": [
+          "\\bcs\\-onboard\\b",
+          "\\bcs\\ onboard\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:onboard)\\b"
+        ]
+      }
+    },
+    "cto-advisor": {
+      "description": "Technical leadership guidance for engineering teams, architecture decisions, and technology strategy. Use when assessing technical debt, scaling engineering tea",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "cto",
+          "advisor",
+          "technical",
+          "leadership",
+          "guidance",
+          "engineering",
+          "architecture",
+          "decisions",
+          "technology",
+          "strategy",
+          "assessing",
+          "debt",
+          "scaling",
+          "evaluating"
+        ],
+        "keywordPatterns": [
+          "\\bcto\\-advisor\\b",
+          "\\bcto\\ advisor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:cto|advisor)\\b"
+        ]
+      }
+    },
+    "culture-architect": {
+      "description": "Build, measure, and evolve company culture as operational behavior \u2014 not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, ",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "culture",
+          "architect",
+          "measure",
+          "evolve",
+          "company",
+          "operational",
+          "behavior",
+          "wall",
+          "posters",
+          "mission",
+          "vision",
+          "values",
+          "workshops"
+        ],
+        "keywordPatterns": [
+          "\\bculture\\-architect\\b",
+          "\\bculture\\ architect\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:culture|architect)\\b"
+        ]
+      }
+    },
+    "decision-logger": {
+      "description": "Two-layer memory architecture for board meeting decisions. Manages raw transcripts (Layer 1) and approved decisions (Layer 2). Use when logging decisions after ",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "decision",
+          "logger",
+          "two-layer",
+          "memory",
+          "architecture",
+          "board",
+          "meeting",
+          "decisions",
+          "raw",
+          "transcripts",
+          "layer",
+          "approved",
+          "logging",
+          "reviewing"
+        ],
+        "keywordPatterns": [
+          "\\bdecision\\-logger\\b",
+          "\\bdecision\\ logger\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:decision|logger)\\b"
+        ]
+      }
+    },
+    "executive-mentor": {
+      "description": "Adversarial thinking partner for founders and executives. Stress-tests plans, prepares for brutal board meetings, dissects decisions with no good options, and f",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "executive",
+          "mentor",
+          "adversarial",
+          "thinking",
+          "partner",
+          "founders",
+          "executives",
+          "stress-tests",
+          "plans",
+          "prepares",
+          "brutal",
+          "board",
+          "meetings",
+          "dissects"
+        ],
+        "keywordPatterns": [
+          "\\bexecutive\\-mentor\\b",
+          "\\bexecutive\\ mentor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:executive|mentor)\\b"
+        ]
+      }
+    },
+    "founder-coach": {
+      "description": "Personal leadership development for founders and first-time CEOs. Covers founder archetype identification, delegation frameworks, energy management, CEO calenda",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "founder",
+          "coach",
+          "personal",
+          "leadership",
+          "development",
+          "founders",
+          "first-time",
+          "ceos",
+          "archetype",
+          "identification",
+          "delegation",
+          "frameworks",
+          "energy"
+        ],
+        "keywordPatterns": [
+          "\\bfounder\\-coach\\b",
+          "\\bfounder\\ coach\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:founder|coach)\\b"
+        ]
+      }
+    },
+    "internal-narrative": {
+      "description": "Build and maintain one coherent company story across all audiences \u2014 employees, investors, customers, candidates, and partners. Detects narrative contradictions",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "internal",
+          "narrative",
+          "maintain",
+          "coherent",
+          "company",
+          "story",
+          "audiences",
+          "employees",
+          "investors",
+          "customers",
+          "candidates",
+          "partners",
+          "detects"
+        ],
+        "keywordPatterns": [
+          "\\binternal\\-narrative\\b",
+          "\\binternal\\ narrative\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:internal|narrative)\\b"
+        ]
+      }
+    },
+    "intl-expansion": {
+      "description": "International market expansion strategy. Market selection, entry modes, localization, regulatory compliance, and go-to-market by region. Use when expanding to n",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "intl",
+          "expansion",
+          "international",
+          "market",
+          "strategy",
+          "selection",
+          "entry",
+          "modes",
+          "localization",
+          "regulatory",
+          "compliance",
+          "go-to-market",
+          "region"
+        ],
+        "keywordPatterns": [
+          "\\bintl\\-expansion\\b",
+          "\\bintl\\ expansion\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:intl|expansion)\\b"
+        ]
+      }
+    },
+    "ma-playbook": {
+      "description": "M&A strategy for acquiring companies or being acquired. Due diligence, valuation, integration, and deal structure. Use when evaluating acquisitions, preparing f",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "playbook",
+          "strategy",
+          "acquiring",
+          "companies",
+          "being",
+          "acquired",
+          "due",
+          "diligence",
+          "valuation",
+          "integration",
+          "deal",
+          "structure",
+          "evaluating"
+        ],
+        "keywordPatterns": [
+          "\\bma\\-playbook\\b",
+          "\\bma\\ playbook\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:playbook)\\b"
+        ]
+      }
+    },
+    "org-health-diagnostic": {
+      "description": "Cross-functional organizational health check combining signals from all C-suite roles. Scores 8 dimensions on a traffic-light scale with drill-down recommendati",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "org",
+          "health",
+          "diagnostic",
+          "cross-functional",
+          "organizational",
+          "check",
+          "combining",
+          "signals",
+          "c-suite",
+          "roles",
+          "scores",
+          "dimensions",
+          "traffic-light",
+          "scale"
+        ],
+        "keywordPatterns": [
+          "\\borg\\-health\\-diagnostic\\b",
+          "\\borg\\ health\\ diagnostic\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:org|health|diagnostic)\\b"
+        ]
+      }
+    },
+    "scenario-war-room": {
+      "description": "Cross-functional what-if modeling for cascading multi-variable scenarios. Unlike single-assumption stress testing, this models compound adversity across all bus",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "scenario",
+          "war",
+          "room",
+          "cross-functional",
+          "what-if",
+          "modeling",
+          "cascading",
+          "multi-variable",
+          "scenarios",
+          "unlike",
+          "single-assumption",
+          "stress",
+          "testing",
+          "models"
+        ],
+        "keywordPatterns": [
+          "\\bscenario\\-war\\-room\\b",
+          "\\bscenario\\ war\\ room\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:scenario|war|room)\\b"
+        ]
+      }
+    },
+    "strategic-alignment": {
+      "description": "Cascades strategy from boardroom to individual contributor. Detects and fixes misalignment between company goals and team execution. Covers strategy articulatio",
+      "priority": 5,
+      "domain": "c-level-advisor",
+      "triggers": {
+        "keywords": [
+          "strategic",
+          "alignment",
+          "cascades",
+          "strategy",
+          "boardroom",
+          "individual",
+          "contributor",
+          "detects",
+          "fixes",
+          "misalignment",
+          "between",
+          "company",
+          "goals",
+          "execution"
+        ],
+        "keywordPatterns": [
+          "\\bstrategic\\-alignment\\b",
+          "\\bstrategic\\ alignment\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:strategic|alignment)\\b"
+        ]
+      }
+    },
+    "capa-officer": {
+      "description": "CAPA system management for medical device QMS. Covers root cause analysis, corrective action planning, effectiveness verification, and CAPA metrics. Use for CAP",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "capa",
+          "officer",
+          "system",
+          "management",
+          "medical",
+          "device",
+          "qms",
+          "root",
+          "cause",
+          "corrective",
+          "action",
+          "planning",
+          "effectiveness"
+        ],
+        "keywordPatterns": [
+          "\\bcapa\\-officer\\b",
+          "\\bcapa\\ officer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:capa|officer)\\b"
+        ]
+      }
+    },
+    "fda-consultant-specialist": {
+      "description": "FDA regulatory consultant for medical device companies. Provides 510(k)/PMA/De Novo pathway guidance, QSR (21 CFR 820) compliance, HIPAA assessments, and device",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "fda",
+          "consultant",
+          "specialist",
+          "regulatory",
+          "medical",
+          "device",
+          "companies",
+          "provides",
+          "pma",
+          "novo",
+          "pathway",
+          "guidance",
+          "qsr"
+        ],
+        "keywordPatterns": [
+          "\\bfda\\-consultant\\-specialist\\b",
+          "\\bfda\\ consultant\\ specialist\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:fda|consultant|specialist)\\b"
+        ]
+      }
+    },
+    "gdpr-dsgvo-expert": {
+      "description": "GDPR and German DSGVO compliance automation. Scans codebases for privacy risks, generates DPIA documentation, tracks data subject rights requests. Use for GDPR ",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "gdpr",
+          "dsgvo",
+          "expert",
+          "german",
+          "compliance",
+          "automation",
+          "scans",
+          "codebases",
+          "privacy",
+          "risks",
+          "dpia",
+          "documentation",
+          "tracks"
+        ],
+        "keywordPatterns": [
+          "\\bgdpr\\-dsgvo\\-expert\\b",
+          "\\bgdpr\\ dsgvo\\ expert\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:gdpr|dsgvo|expert)\\b"
+        ]
+      }
+    },
+    "information-security-manager-iso27001": {
+      "description": "ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and MedTech companies. Use for ISMS design, security risk assessment, control implemen",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "information",
+          "security",
+          "manager",
+          "iso27001",
+          "iso",
+          "isms",
+          "implementation",
+          "cybersecurity",
+          "governance",
+          "healthtech",
+          "medtech",
+          "companies",
+          "risk",
+          "assessment"
+        ],
+        "keywordPatterns": [
+          "\\binformation\\-security\\-manager\\-iso27001\\b",
+          "\\binformation\\ security\\ manager\\ iso27001\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:information|security|manager)\\b"
+        ]
+      }
+    },
+    "isms-audit-expert": {
+      "description": "Information Security Management System auditing for ISO 27001 compliance, security control assessment, and certification support",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "isms",
+          "audit",
+          "expert",
+          "information",
+          "security",
+          "management",
+          "system",
+          "auditing",
+          "iso",
+          "compliance",
+          "control",
+          "assessment",
+          "certification",
+          "support"
+        ],
+        "keywordPatterns": [
+          "\\bisms\\-audit\\-expert\\b",
+          "\\bisms\\ audit\\ expert\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:isms|audit|expert)\\b"
+        ]
+      }
+    },
+    "mdr-745-specialist": {
+      "description": "EU MDR 2017/745 compliance specialist for medical device classification, technical documentation, clinical evidence, and post-market surveillance. Covers Annex ",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "mdr",
+          "745",
+          "specialist",
+          "compliance",
+          "medical",
+          "device",
+          "classification",
+          "technical",
+          "documentation",
+          "clinical",
+          "evidence",
+          "post-market",
+          "surveillance"
+        ],
+        "keywordPatterns": [
+          "\\bmdr\\-745\\-specialist\\b",
+          "\\bmdr\\ 745\\ specialist\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:mdr|745|specialist)\\b"
+        ]
+      }
+    },
+    "qms-audit-expert": {
+      "description": "ISO 13485 internal audit expertise for medical device QMS. Covers audit planning, execution, nonconformity classification, and CAPA verification. Use for intern",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "qms",
+          "audit",
+          "expert",
+          "iso",
+          "internal",
+          "expertise",
+          "medical",
+          "device",
+          "planning",
+          "execution",
+          "nonconformity",
+          "classification",
+          "capa"
+        ],
+        "keywordPatterns": [
+          "\\bqms\\-audit\\-expert\\b",
+          "\\bqms\\ audit\\ expert\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:qms|audit|expert)\\b"
+        ]
+      }
+    },
+    "quality-documentation-manager": {
+      "description": "Document control system management for medical device QMS. Covers document numbering, version control, change management, and 21 CFR Part 11 compliance. Use for",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "quality",
+          "documentation",
+          "manager",
+          "document",
+          "control",
+          "system",
+          "management",
+          "medical",
+          "device",
+          "qms",
+          "numbering",
+          "version",
+          "change",
+          "cfr"
+        ],
+        "keywordPatterns": [
+          "\\bquality\\-documentation\\-manager\\b",
+          "\\bquality\\ documentation\\ manager\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:quality|documentation|manager)\\b"
+        ]
+      }
+    },
+    "quality-manager-qmr": {
+      "description": "Senior Quality Manager Responsible Person (QMR) for HealthTech and MedTech companies. Provides quality system governance, management review leadership, regulato",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "quality",
+          "manager",
+          "qmr",
+          "senior",
+          "responsible",
+          "person",
+          "healthtech",
+          "medtech",
+          "companies",
+          "provides",
+          "system",
+          "governance"
+        ],
+        "keywordPatterns": [
+          "\\bquality\\-manager\\-qmr\\b",
+          "\\bquality\\ manager\\ qmr\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:quality|manager|qmr)\\b"
+        ]
+      }
+    },
+    "quality-manager-qms-iso13485": {
+      "description": "ISO 13485 Quality Management System implementation and maintenance for medical device organizations. Provides QMS design, documentation control, internal auditi",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "quality",
+          "manager",
+          "qms",
+          "iso13485",
+          "iso",
+          "management",
+          "system",
+          "implementation",
+          "maintenance",
+          "medical",
+          "device",
+          "organizations",
+          "provides",
+          "documentation"
+        ],
+        "keywordPatterns": [
+          "\\bquality\\-manager\\-qms\\-iso13485\\b",
+          "\\bquality\\ manager\\ qms\\ iso13485\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:quality|manager|qms)\\b"
+        ]
+      }
+    },
+    "regulatory-affairs-head": {
+      "description": "Senior Regulatory Affairs Manager for HealthTech and MedTech companies. Provides regulatory strategy development, submission management, pathway analysis, globa",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "regulatory",
+          "affairs",
+          "head",
+          "senior",
+          "manager",
+          "healthtech",
+          "medtech",
+          "companies",
+          "provides",
+          "strategy",
+          "development",
+          "submission",
+          "management"
+        ],
+        "keywordPatterns": [
+          "\\bregulatory\\-affairs\\-head\\b",
+          "\\bregulatory\\ affairs\\ head\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:regulatory|affairs|head)\\b"
+        ]
+      }
+    },
+    "risk-management-specialist": {
+      "description": "Medical device risk management specialist implementing ISO 14971 throughout product lifecycle. Provides risk analysis, risk evaluation, risk control, and post-p",
+      "priority": 5,
+      "domain": "compliance",
+      "triggers": {
+        "keywords": [
+          "risk",
+          "management",
+          "specialist",
+          "medical",
+          "device",
+          "implementing",
+          "iso",
+          "throughout",
+          "product",
+          "lifecycle",
+          "provides",
+          "evaluation"
+        ],
+        "keywordPatterns": [
+          "\\brisk\\-management\\-specialist\\b",
+          "\\brisk\\ management\\ specialist\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:risk|management|specialist)\\b"
+        ]
+      }
+    },
+    "agent-designer": {
+      "description": "Design and evaluate multi-agent systems: architecture patterns, agent role definition, tool design principles, communication strategies and evaluation framework",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "agent",
+          "designer",
+          "evaluate",
+          "multi-agent",
+          "systems",
+          "architecture",
+          "patterns",
+          "role",
+          "definition",
+          "tool",
+          "principles",
+          "communication",
+          "strategies"
+        ],
+        "keywordPatterns": [
+          "\\bagent\\-designer\\b",
+          "\\bagent\\ designer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:agent|designer)\\b"
+        ]
+      }
+    },
+    "agent-workflow-designer": {
+      "description": "Design production multi-agent orchestration using five core patterns: sequential pipeline, parallel fan-out/fan-in, hierarchical delegation, event-driven and co",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "agent",
+          "workflow",
+          "designer",
+          "multi-agent",
+          "orchestration",
+          "five",
+          "core",
+          "patterns",
+          "sequential",
+          "pipeline",
+          "parallel",
+          "fan-out",
+          "fan-in",
+          "hierarchical"
+        ],
+        "keywordPatterns": [
+          "\\bagent\\-workflow\\-designer\\b",
+          "\\bagent\\ workflow\\ designer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:agent|workflow|designer)\\b"
+        ]
+      }
+    },
+    "api-design-reviewer": {
+      "description": "Review REST API designs for convention compliance, breaking changes and overall design quality, producing a lint report and a scorecard. Use when reviewing an A",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "api",
+          "reviewer",
+          "rest",
+          "convention",
+          "compliance",
+          "breaking",
+          "changes",
+          "overall",
+          "quality",
+          "producing",
+          "lint",
+          "report",
+          "scorecard"
+        ],
+        "keywordPatterns": [
+          "\\bapi\\-design\\-reviewer\\b",
+          "\\bapi\\ design\\ reviewer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:api|reviewer)\\b"
+        ]
+      }
+    },
+    "api-test-suite-builder": {
+      "description": "Scan API routes across Next.js App Router, Express, FastAPI and Django REST, then generate test suites covering auth, validation, error codes, pagination, uploa",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "api",
+          "test",
+          "suite",
+          "builder",
+          "scan",
+          "routes",
+          "next.js",
+          "app",
+          "router",
+          "express",
+          "fastapi",
+          "django",
+          "rest",
+          "suites"
+        ],
+        "keywordPatterns": [
+          "\\bapi\\-test\\-suite\\-builder\\b",
+          "\\bapi\\ test\\ suite\\ builder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:api|test|suite)\\b"
+        ]
+      }
+    },
+    "changelog-generator": {
+      "description": "Produce auditable release notes from Conventional Commits, with separate commit parsing, semantic version bump logic and changelog rendering. Use when cutting a",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "changelog",
+          "generator",
+          "auditable",
+          "release",
+          "notes",
+          "conventional",
+          "commits",
+          "separate",
+          "commit",
+          "parsing",
+          "semantic",
+          "version",
+          "bump",
+          "logic"
+        ],
+        "keywordPatterns": [
+          "\\bchangelog\\-generator\\b",
+          "\\bchangelog\\ generator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:changelog|generator)\\b"
+        ]
+      }
+    },
+    "ci-cd-pipeline-builder": {
+      "description": "Generate CI/CD pipelines from detected project stack signals, with repeatable checks and environment-aware deployment stages. Use when setting up CI for a proje",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "pipeline",
+          "builder",
+          "pipelines",
+          "detected",
+          "stack",
+          "signals",
+          "repeatable",
+          "checks",
+          "environment-aware",
+          "deployment",
+          "stages",
+          "setting",
+          "adding",
+          "stage"
+        ],
+        "keywordPatterns": [
+          "\\bci\\-cd\\-pipeline\\-builder\\b",
+          "\\bci\\ cd\\ pipeline\\ builder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:pipeline|builder)\\b"
+        ]
+      }
+    },
+    "codebase-onboarding": {
+      "description": "Analyze a codebase and generate onboarding documentation: architecture overview, key file map, local setup, common task runbooks, debugging guide and contributi",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "codebase",
+          "onboarding",
+          "documentation",
+          "architecture",
+          "overview",
+          "key",
+          "map",
+          "local",
+          "setup",
+          "common",
+          "task",
+          "runbooks"
+        ],
+        "keywordPatterns": [
+          "\\bcodebase\\-onboarding\\b",
+          "\\bcodebase\\ onboarding\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:codebase|onboarding)\\b"
+        ]
+      }
+    },
+    "database-designer": {
+      "description": "Expert database design, analysis and optimization: schema design, index optimization and migration management for modern database systems. Use when designing a ",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "database",
+          "designer",
+          "expert",
+          "optimization",
+          "schema",
+          "index",
+          "migration",
+          "management",
+          "modern",
+          "systems",
+          "diagnosing",
+          "slow",
+          "queries"
+        ],
+        "keywordPatterns": [
+          "\\bdatabase\\-designer\\b",
+          "\\bdatabase\\ designer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:database|designer)\\b"
+        ]
+      }
+    },
+    "database-schema-designer": {
+      "description": "Turn requirements into a relational schema and generate migrations, TypeScript/Python types, seed data, RLS policies and indexes. Handles multi-tenancy, soft de",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "database",
+          "schema",
+          "designer",
+          "turn",
+          "requirements",
+          "relational",
+          "migrations",
+          "typescript",
+          "python",
+          "types",
+          "seed",
+          "rls",
+          "policies",
+          "indexes"
+        ],
+        "keywordPatterns": [
+          "\\bdatabase\\-schema\\-designer\\b",
+          "\\bdatabase\\ schema\\ designer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:database|schema|designer)\\b"
+        ]
+      }
+    },
+    "dependency-auditor": {
+      "description": "Audit dependencies across multi-language projects for CVEs, license compliance, outdated packages and tree bloat, then plan safe upgrades. Use when reviewing su",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "dependency",
+          "auditor",
+          "audit",
+          "dependencies",
+          "multi-language",
+          "cves",
+          "license",
+          "compliance",
+          "outdated",
+          "packages",
+          "tree",
+          "bloat",
+          "plan",
+          "safe"
+        ],
+        "keywordPatterns": [
+          "\\bdependency\\-auditor\\b",
+          "\\bdependency\\ auditor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:dependency|auditor)\\b"
+        ]
+      }
+    },
+    "env-secrets-manager": {
+      "description": "Manage the .env lifecycle across dev/staging/prod: auto-generate .env.example, validate required vars, detect secret leaks in git history and run credential rot",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "env",
+          "secrets",
+          "manager",
+          "lifecycle",
+          "dev",
+          "staging",
+          "prod",
+          "auto-generate",
+          "env.example",
+          "validate",
+          "required",
+          "vars",
+          "detect",
+          "secret"
+        ],
+        "keywordPatterns": [
+          "\\benv\\-secrets\\-manager\\b",
+          "\\benv\\ secrets\\ manager\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:env|secrets|manager)\\b"
+        ]
+      }
+    },
+    "git-worktree-manager": {
+      "description": "Run parallel feature work with Git worktrees: branch isolation, port allocation, environment sync and cleanup, so each worktree runs as an independent local app",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "git",
+          "worktree",
+          "manager",
+          "parallel",
+          "feature",
+          "worktrees",
+          "branch",
+          "isolation",
+          "port",
+          "allocation",
+          "environment",
+          "sync",
+          "cleanup"
+        ],
+        "keywordPatterns": [
+          "\\bgit\\-worktree\\-manager\\b",
+          "\\bgit\\ worktree\\ manager\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:git|worktree|manager)\\b"
+        ]
+      }
+    },
+    "interview-system-designer": {
+      "description": "This skill should be used when the user asks to \"design interview processes\", \"create hiring pipelines\", \"calibrate interview loops\", \"generate interview questi",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "interview",
+          "system",
+          "designer",
+          "should",
+          "user",
+          "asks",
+          "processes",
+          "hiring",
+          "pipelines",
+          "calibrate",
+          "loops",
+          "questions",
+          "competency",
+          "matrices"
+        ],
+        "keywordPatterns": [
+          "\\binterview\\-system\\-designer\\b",
+          "\\binterview\\ system\\ designer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:interview|system|designer)\\b"
+        ]
+      }
+    },
+    "mcp-server-builder": {
+      "description": "Design and ship production MCP servers from API contracts, treating OpenAPI as the source of truth. Covers scaffolding, schema quality, validation and safe evol",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "mcp",
+          "server",
+          "builder",
+          "ship",
+          "servers",
+          "api",
+          "contracts",
+          "treating",
+          "openapi",
+          "source",
+          "truth",
+          "scaffolding",
+          "schema",
+          "quality"
+        ],
+        "keywordPatterns": [
+          "\\bmcp\\-server\\-builder\\b",
+          "\\bmcp\\ server\\ builder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:mcp|server|builder)\\b"
+        ]
+      }
+    },
+    "migration-architect": {
+      "description": "Plan, execute and validate complex system migrations with minimal downtime: strategy planning, compatibility analysis and rollback design. Use when moving betwe",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "migration",
+          "architect",
+          "plan",
+          "execute",
+          "validate",
+          "complex",
+          "system",
+          "migrations",
+          "minimal",
+          "downtime",
+          "strategy",
+          "planning",
+          "compatibility",
+          "rollback"
+        ],
+        "keywordPatterns": [
+          "\\bmigration\\-architect\\b",
+          "\\bmigration\\ architect\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:migration|architect)\\b"
+        ]
+      }
+    },
+    "monorepo-navigator": {
+      "description": "Navigate and optimize monorepos across Turborepo, Nx, pnpm workspaces and Lerna: cross-package impact analysis, selective builds on affected packages, remote ca",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "monorepo",
+          "navigator",
+          "navigate",
+          "optimize",
+          "monorepos",
+          "turborepo",
+          "pnpm",
+          "workspaces",
+          "lerna",
+          "cross-package",
+          "impact",
+          "selective",
+          "affected",
+          "packages"
+        ],
+        "keywordPatterns": [
+          "\\bmonorepo\\-navigator\\b",
+          "\\bmonorepo\\ navigator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:monorepo|navigator)\\b"
+        ]
+      }
+    },
+    "observability-designer": {
+      "description": "Design production observability across metrics, logs and traces, with SLI/SLO frameworks, golden signals, dashboard design and alert tuning. Use when instrument",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "observability",
+          "designer",
+          "metrics",
+          "logs",
+          "traces",
+          "sli",
+          "slo",
+          "frameworks",
+          "golden",
+          "signals",
+          "dashboard",
+          "alert",
+          "tuning"
+        ],
+        "keywordPatterns": [
+          "\\bobservability\\-designer\\b",
+          "\\bobservability\\ designer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:observability|designer)\\b"
+        ]
+      }
+    },
+    "performance-profiler": {
+      "description": "Profile Node.js, Python and Go applications to find CPU, memory and I/O bottlenecks: flamegraphs, bundle analysis, query optimization, leak detection and k6/Art",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "performance",
+          "profiler",
+          "profile",
+          "node.js",
+          "python",
+          "applications",
+          "find",
+          "cpu",
+          "memory",
+          "bottlenecks",
+          "flamegraphs",
+          "bundle",
+          "query",
+          "optimization"
+        ],
+        "keywordPatterns": [
+          "\\bperformance\\-profiler\\b",
+          "\\bperformance\\ profiler\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:performance|profiler)\\b"
+        ]
+      }
+    },
+    "pr-review-expert": {
+      "description": "Systematic review of GitHub PRs and GitLab MRs: blast radius analysis, security scanning, breaking change detection and test coverage delta, delivered as a prio",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "expert",
+          "systematic",
+          "github",
+          "prs",
+          "gitlab",
+          "mrs",
+          "blast",
+          "radius",
+          "security",
+          "scanning",
+          "breaking",
+          "change",
+          "detection"
+        ],
+        "keywordPatterns": [
+          "\\bpr\\-review\\-expert\\b",
+          "\\bpr\\ review\\ expert\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:expert)\\b"
+        ]
+      }
+    },
+    "rag-architect": {
+      "description": "Design and optimize production RAG pipelines: chunking strategies, embedding model selection, vector database choice, retrieval strategies and evaluation framew",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "rag",
+          "architect",
+          "optimize",
+          "pipelines",
+          "chunking",
+          "strategies",
+          "embedding",
+          "model",
+          "selection",
+          "vector",
+          "database",
+          "choice",
+          "retrieval"
+        ],
+        "keywordPatterns": [
+          "\\brag\\-architect\\b",
+          "\\brag\\ architect\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:rag|architect)\\b"
+        ]
+      }
+    },
+    "release-manager": {
+      "description": "Manage releases end to end: parse conventional commits, generate changelogs, determine version bumps and orchestrate the release process. Use when preparing, cu",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "release",
+          "manager",
+          "releases",
+          "end",
+          "parse",
+          "conventional",
+          "commits",
+          "changelogs",
+          "determine",
+          "version",
+          "bumps",
+          "orchestrate",
+          "process"
+        ],
+        "keywordPatterns": [
+          "\\brelease\\-manager\\b",
+          "\\brelease\\ manager\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:release|manager)\\b"
+        ]
+      }
+    },
+    "runbook-generator": {
+      "description": "Generate operational runbooks from a codebase: detects CI/CD, database, hosting and container stack, then writes step-by-step procedures with commands, verifica",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "runbook",
+          "generator",
+          "operational",
+          "runbooks",
+          "codebase",
+          "detects",
+          "database",
+          "hosting",
+          "container",
+          "stack",
+          "step-by-step",
+          "procedures",
+          "commands",
+          "verification"
+        ],
+        "keywordPatterns": [
+          "\\brunbook\\-generator\\b",
+          "\\brunbook\\ generator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:runbook|generator)\\b"
+        ]
+      }
+    },
+    "skill-security-auditor": {
+      "description": "Security audit and vulnerability scanner for AI agent skills before installation. Use when: (1) evaluating a skill from an untrusted source, (2) auditing a skil",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "security",
+          "auditor",
+          "audit",
+          "vulnerability",
+          "scanner",
+          "agent",
+          "installation",
+          "evaluating",
+          "untrusted",
+          "source",
+          "auditing",
+          "directory",
+          "git"
+        ],
+        "keywordPatterns": [
+          "\\bskill\\-security\\-auditor\\b",
+          "\\bskill\\ security\\ auditor\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:security|auditor)\\b"
+        ]
+      }
+    },
+    "skill-tester": {
+      "description": "Validate and score Claude Code skills: frontmatter and structure checks, script testing, multi-dimensional quality scoring and tier classification. Python stdli",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "tester",
+          "validate",
+          "score",
+          "claude",
+          "frontmatter",
+          "structure",
+          "checks",
+          "script",
+          "testing",
+          "multi-dimensional",
+          "quality",
+          "scoring",
+          "tier"
+        ],
+        "keywordPatterns": [
+          "\\bskill\\-tester\\b",
+          "\\bskill\\ tester\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:tester)\\b"
+        ]
+      }
+    },
+    "tech-debt-tracker": {
+      "description": "Identify, classify, prioritize and track technical debt across code, architecture, test and documentation dimensions. Use when planning refactor work, justifyin",
+      "priority": 8,
+      "domain": "engineering",
+      "triggers": {
+        "keywords": [
+          "tech",
+          "debt",
+          "tracker",
+          "identify",
+          "classify",
+          "prioritize",
+          "track",
+          "technical",
+          "architecture",
+          "test",
+          "documentation",
+          "dimensions",
+          "planning",
+          "refactor"
+        ],
+        "keywordPatterns": [
+          "\\btech\\-debt\\-tracker\\b",
+          "\\btech\\ debt\\ tracker\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:tech|debt|tracker)\\b"
+        ]
+      }
+    },
+    "aws-solution-architect": {
+      "description": "Design AWS architectures for startups using serverless patterns and IaC templates. Use when asked to design serverless architecture, create CloudFormation templ",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "aws",
+          "solution",
+          "architect",
+          "architectures",
+          "startups",
+          "serverless",
+          "patterns",
+          "iac",
+          "templates",
+          "asked",
+          "architecture",
+          "cloudformation",
+          "optimize",
+          "costs"
+        ],
+        "keywordPatterns": [
+          "\\baws\\-solution\\-architect\\b",
+          "\\baws\\ solution\\ architect\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:aws|solution|architect)\\b"
+        ]
+      }
+    },
+    "code-reviewer": {
+      "description": "Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "reviewer",
+          "automation",
+          "typescript",
+          "javascript",
+          "python",
+          "swift",
+          "kotlin",
+          "analyzes",
+          "prs",
+          "complexity",
+          "risk",
+          "checks",
+          "quality"
+        ],
+        "keywordPatterns": [
+          "\\bcode\\-reviewer\\b",
+          "\\bcode\\ reviewer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:reviewer)\\b"
+        ]
+      }
+    },
+    "email-template-builder": {
+      "description": "Build transactional email systems with React Email: templates, provider integration, preview server, i18n, dark mode, spam optimization and analytics. Targets R",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "email",
+          "template",
+          "builder",
+          "transactional",
+          "systems",
+          "react",
+          "templates",
+          "provider",
+          "integration",
+          "preview",
+          "server",
+          "i18n",
+          "dark",
+          "mode"
+        ],
+        "keywordPatterns": [
+          "\\bemail\\-template\\-builder\\b",
+          "\\bemail\\ template\\ builder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:email|template|builder)\\b"
+        ]
+      }
+    },
+    "incident-commander": {
+      "description": "Run incident response from detection through resolution and postmortem: severity classification, timeline reconstruction and post-incident analysis. Use during ",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "incident",
+          "commander",
+          "response",
+          "detection",
+          "through",
+          "resolution",
+          "postmortem",
+          "severity",
+          "classification",
+          "timeline",
+          "reconstruction",
+          "post-incident",
+          "during"
+        ],
+        "keywordPatterns": [
+          "\\bincident\\-commander\\b",
+          "\\bincident\\ commander\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:incident|commander)\\b"
+        ]
+      }
+    },
+    "ms365-tenant-manager": {
+      "description": "Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online con",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "ms365",
+          "tenant",
+          "manager",
+          "microsoft",
+          "administration",
+          "global",
+          "administrators",
+          "automate",
+          "m365",
+          "setup",
+          "office",
+          "admin",
+          "tasks",
+          "azure"
+        ],
+        "keywordPatterns": [
+          "\\bms365\\-tenant\\-manager\\b",
+          "\\bms365\\ tenant\\ manager\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:ms365|tenant|manager)\\b"
+        ]
+      }
+    },
+    "playwright-pro": {
+      "description": "Production-grade Playwright testing toolkit. Generate tests, fix flaky failures, migrate from Cypress/Selenium, sync with TestRail, run on BrowserStack. 55 temp",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "playwright",
+          "pro",
+          "production-grade",
+          "testing",
+          "toolkit",
+          "tests",
+          "fix",
+          "flaky",
+          "failures",
+          "migrate",
+          "cypress",
+          "selenium",
+          "sync"
+        ],
+        "keywordPatterns": [
+          "\\bplaywright\\-pro\\b",
+          "\\bplaywright\\ pro\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:playwright|pro)\\b"
+        ]
+      }
+    },
+    "self-improving-agent": {
+      "description": "Curate Claude Code's auto-memory into durable project knowledge. Analyze MEMORY.md for patterns, promote proven learnings to CLAUDE.md and .claude/rules/, extra",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "self",
+          "improving",
+          "agent",
+          "curate",
+          "claude",
+          "auto-memory",
+          "durable",
+          "knowledge",
+          "memory.md",
+          "patterns",
+          "promote",
+          "proven",
+          "learnings",
+          "claude.md"
+        ],
+        "keywordPatterns": [
+          "\\bself\\-improving\\-agent\\b",
+          "\\bself\\ improving\\ agent\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:self|improving|agent)\\b"
+        ]
+      }
+    },
+    "senior-architect": {
+      "description": "This skill should be used when the user asks to \"design system architecture\", \"evaluate microservices vs monolith\", \"create architecture diagrams\", \"analyze dep",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "architect",
+          "should",
+          "user",
+          "asks",
+          "system",
+          "architecture",
+          "evaluate",
+          "microservices",
+          "monolith",
+          "diagrams",
+          "dependencies",
+          "choose",
+          "database"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-architect\\b",
+          "\\bsenior\\ architect\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|architect)\\b"
+        ]
+      }
+    },
+    "senior-backend": {
+      "description": "This skill should be used when the user asks to \"design REST APIs\", \"optimize database queries\", \"implement authentication\", \"build microservices\", \"review back",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "backend",
+          "should",
+          "user",
+          "asks",
+          "rest",
+          "apis",
+          "optimize",
+          "database",
+          "queries",
+          "implement",
+          "authentication",
+          "microservices"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-backend\\b",
+          "\\bsenior\\ backend\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|backend)\\b"
+        ]
+      }
+    },
+    "senior-computer-vision": {
+      "description": "Computer vision engineering skill for object detection, image segmentation, and visual AI systems. Covers CNN and Vision Transformer architectures, YOLO/Faster ",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "computer",
+          "vision",
+          "engineering",
+          "object",
+          "detection",
+          "image",
+          "segmentation",
+          "visual",
+          "systems",
+          "cnn",
+          "transformer",
+          "architectures"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-computer\\-vision\\b",
+          "\\bsenior\\ computer\\ vision\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|computer|vision)\\b"
+        ]
+      }
+    },
+    "senior-data-engineer": {
+      "description": "Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "engineer",
+          "engineering",
+          "scalable",
+          "pipelines",
+          "etl",
+          "elt",
+          "systems",
+          "infrastructure",
+          "expertise",
+          "python",
+          "sql",
+          "spark",
+          "airflow"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-data\\-engineer\\b",
+          "\\bsenior\\ data\\ engineer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|engineer)\\b"
+        ]
+      }
+    },
+    "senior-data-scientist": {
+      "description": "World-class data science skill for statistical modeling, experimentation, causal inference, and advanced analytics. Expertise in Python (NumPy, Pandas, Scikit-l",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "scientist",
+          "world-class",
+          "science",
+          "statistical",
+          "modeling",
+          "experimentation",
+          "causal",
+          "inference",
+          "advanced",
+          "analytics",
+          "expertise",
+          "python",
+          "numpy"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-data\\-scientist\\b",
+          "\\bsenior\\ data\\ scientist\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|scientist)\\b"
+        ]
+      }
+    },
+    "senior-devops": {
+      "description": "Comprehensive DevOps skill for CI/CD, infrastructure automation, containerization, and cloud platforms (AWS, GCP, Azure). Includes pipeline setup, infrastructur",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "devops",
+          "comprehensive",
+          "infrastructure",
+          "automation",
+          "containerization",
+          "cloud",
+          "platforms",
+          "aws",
+          "gcp",
+          "azure",
+          "pipeline",
+          "setup"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-devops\\b",
+          "\\bsenior\\ devops\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|devops)\\b"
+        ]
+      }
+    },
+    "senior-frontend": {
+      "description": "Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, an",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "frontend",
+          "development",
+          "react",
+          "next.js",
+          "typescript",
+          "tailwind",
+          "css",
+          "applications",
+          "components",
+          "optimizing",
+          "performance",
+          "analyzing"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-frontend\\b",
+          "\\bsenior\\ frontend\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|frontend)\\b"
+        ]
+      }
+    },
+    "senior-fullstack": {
+      "description": "Fullstack development toolkit with project scaffolding for Next.js, FastAPI, MERN, and Django stacks, code quality analysis with security and complexity scoring",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "fullstack",
+          "development",
+          "toolkit",
+          "scaffolding",
+          "next.js",
+          "fastapi",
+          "mern",
+          "django",
+          "stacks",
+          "quality",
+          "security",
+          "complexity"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-fullstack\\b",
+          "\\bsenior\\ fullstack\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|fullstack)\\b"
+        ]
+      }
+    },
+    "senior-ml-engineer": {
+      "description": "ML engineering skill for productionizing models, building MLOps pipelines, and integrating LLMs. Covers model deployment, feature stores, drift monitoring, RAG ",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "engineer",
+          "engineering",
+          "productionizing",
+          "models",
+          "mlops",
+          "pipelines",
+          "integrating",
+          "llms",
+          "model",
+          "deployment",
+          "feature",
+          "stores",
+          "drift"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-ml\\-engineer\\b",
+          "\\bsenior\\ ml\\ engineer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|engineer)\\b"
+        ]
+      }
+    },
+    "senior-prompt-engineer": {
+      "description": "This skill should be used when the user asks to \"optimize prompts\", \"design prompt templates\", \"evaluate LLM outputs\", \"build agentic systems\", \"implement RAG\",",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "prompt",
+          "engineer",
+          "should",
+          "user",
+          "asks",
+          "optimize",
+          "prompts",
+          "templates",
+          "evaluate",
+          "llm",
+          "agentic",
+          "systems",
+          "implement"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-prompt\\-engineer\\b",
+          "\\bsenior\\ prompt\\ engineer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|prompt|engineer)\\b"
+        ]
+      }
+    },
+    "senior-qa": {
+      "description": "This skill should be used when the user asks to \"generate tests\", \"write unit tests\", \"analyze test coverage\", \"scaffold E2E tests\", \"set up Playwright\", \"confi",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "should",
+          "user",
+          "asks",
+          "tests",
+          "unit",
+          "test",
+          "coverage",
+          "scaffold",
+          "e2e",
+          "playwright",
+          "configure",
+          "jest"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-qa\\b",
+          "\\bsenior\\ qa\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior)\\b"
+        ]
+      }
+    },
+    "senior-secops": {
+      "description": "Comprehensive SecOps skill for application security, vulnerability management, compliance, and secure development practices. Includes security scanning, vulnera",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "secops",
+          "comprehensive",
+          "application",
+          "security",
+          "vulnerability",
+          "management",
+          "compliance",
+          "secure",
+          "development",
+          "practices",
+          "scanning",
+          "assessment"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-secops\\b",
+          "\\bsenior\\ secops\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|secops)\\b"
+        ]
+      }
+    },
+    "senior-security": {
+      "description": "Security engineering toolkit for threat modeling, vulnerability analysis, secure architecture, and penetration testing. Includes STRIDE analysis, OWASP guidance",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "security",
+          "engineering",
+          "toolkit",
+          "threat",
+          "modeling",
+          "vulnerability",
+          "secure",
+          "architecture",
+          "penetration",
+          "testing",
+          "stride",
+          "owasp"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-security\\b",
+          "\\bsenior\\ security\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior|security)\\b"
+        ]
+      }
+    },
+    "stripe-integration-expert": {
+      "description": "Implement production Stripe integrations: subscriptions with trials and proration, one-time payments, usage-based billing, checkout sessions, idempotent webhook",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "stripe",
+          "integration",
+          "expert",
+          "implement",
+          "integrations",
+          "subscriptions",
+          "trials",
+          "proration",
+          "one-time",
+          "payments",
+          "usage-based",
+          "billing",
+          "checkout",
+          "sessions"
+        ],
+        "keywordPatterns": [
+          "\\bstripe\\-integration\\-expert\\b",
+          "\\bstripe\\ integration\\ expert\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:stripe|integration|expert)\\b"
+        ]
+      }
+    },
+    "tdd-guide": {
+      "description": "Test-driven development workflow with test generation, coverage analysis, and multi-framework support",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "tdd",
+          "guide",
+          "test-driven",
+          "development",
+          "workflow",
+          "test",
+          "generation",
+          "coverage",
+          "multi-framework",
+          "support"
+        ],
+        "keywordPatterns": [
+          "\\btdd\\-guide\\b",
+          "\\btdd\\ guide\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:tdd|guide)\\b"
+        ]
+      }
+    },
+    "tech-stack-evaluator": {
+      "description": "Technology stack evaluation and comparison with TCO analysis, security assessment, and ecosystem health scoring. Use when comparing frameworks, evaluating techn",
+      "priority": 8,
+      "domain": "engineering-team",
+      "triggers": {
+        "keywords": [
+          "tech",
+          "stack",
+          "evaluator",
+          "technology",
+          "evaluation",
+          "comparison",
+          "tco",
+          "security",
+          "assessment",
+          "ecosystem",
+          "health",
+          "scoring",
+          "comparing",
+          "frameworks"
+        ],
+        "keywordPatterns": [
+          "\\btech\\-stack\\-evaluator\\b",
+          "\\btech\\ stack\\ evaluator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:tech|stack|evaluator)\\b"
+        ]
+      }
+    },
+    "financial-analyst": {
+      "description": "Performs financial ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction for strategic decision-making",
+      "priority": 5,
+      "domain": "finance",
+      "triggers": {
+        "keywords": [
+          "financial",
+          "analyst",
+          "performs",
+          "ratio",
+          "dcf",
+          "valuation",
+          "budget",
+          "variance",
+          "rolling",
+          "forecast",
+          "construction",
+          "strategic",
+          "decision-making"
+        ],
+        "keywordPatterns": [
+          "\\bfinancial\\-analyst\\b",
+          "\\bfinancial\\ analyst\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:financial|analyst)\\b"
+        ]
+      }
+    },
+    "ab-test-setup": {
+      "description": "When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions \"A/B test,\" \"split test,\" \"experiment,\" \"test this ",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "test",
+          "setup",
+          "user",
+          "plan",
+          "implement",
+          "experiment",
+          "mentions",
+          "split",
+          "change",
+          "variant",
+          "copy",
+          "multivariate",
+          "hypothesis"
+        ],
+        "keywordPatterns": [
+          "\\bab\\-test\\-setup\\b",
+          "\\bab\\ test\\ setup\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:test|setup)\\b"
+        ]
+      }
+    },
+    "ad-creative": {
+      "description": "When the user needs to generate, iterate, or scale ad creative for paid advertising. Use when they say 'write ad copy,' 'generate headlines,' 'create ad variati",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "creative",
+          "user",
+          "iterate",
+          "scale",
+          "paid",
+          "advertising",
+          "say",
+          "copy",
+          "headlines",
+          "variations",
+          "bulk",
+          "ads"
+        ],
+        "keywordPatterns": [
+          "\\bad\\-creative\\b",
+          "\\bad\\ creative\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:creative)\\b"
+        ]
+      }
+    },
+    "ai-seo": {
+      "description": "Optimize content to get cited by AI search engines \u2014 ChatGPT, Perplexity, Google AI Overviews, Claude, Gemini, Copilot. Use when you want your content to appear",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "seo",
+          "optimize",
+          "content",
+          "cited",
+          "search",
+          "engines",
+          "chatgpt",
+          "perplexity",
+          "google",
+          "overviews",
+          "claude",
+          "gemini",
+          "copilot"
+        ],
+        "keywordPatterns": [
+          "\\bai\\-seo\\b",
+          "\\bai\\ seo\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:seo)\\b"
+        ]
       }
     },
     "analytics-tracking": {
-      "description": "Analytics with Amplitude, FullStory, Datadog, Sentry",
+      "description": "Set up, audit, and debug analytics tracking implementation \u2014 GA4, Google Tag Manager, event taxonomy, conversion tracking, and data quality. Use when building a",
       "priority": 5,
+      "domain": "marketing",
       "triggers": {
-        "keywords": ["analytics", "tracking", "amplitude", "fullstory", "datadog", "event", "sentry"],
-        "keywordPatterns": ["\\btrack\\b", "\\bevent\\b", "\\blog\\b.*event"],
-        "pathPatterns": ["**/analytics/**", "**/tracking/**", "**/datadog/**", "**/sentry/**"],
-        "intentPatterns": [
-          "(?:track|log).*(?:event|action)",
-          "(?:add).*(?:analytics|tracking)"
+        "keywords": [
+          "analytics",
+          "tracking",
+          "audit",
+          "debug",
+          "implementation",
+          "ga4",
+          "google",
+          "tag",
+          "manager",
+          "event",
+          "taxonomy",
+          "conversion"
         ],
-        "contentPatterns": ["Analytics\\.log", "logEvent", "Sentry\\."]
-      }
-    },
-    "list-pagination": {
-      "description": "FlashList, pagination, infinite scroll patterns",
-      "priority": 5,
-      "triggers": {
-        "keywords": ["pagination", "flashlist", "infinite", "scroll", "list", "flatlist", "pull to refresh"],
-        "keywordPatterns": ["\\blist\\b", "paginate", "infinite.scroll"],
-        "pathPatterns": ["**/*List.tsx", "**/*List/**"],
-        "intentPatterns": [
-          "(?:add|implement).*(?:pagination|infinite)",
-          "(?:paginate).*(?:data|list)"
+        "keywordPatterns": [
+          "\\banalytics\\-tracking\\b",
+          "\\banalytics\\ tracking\\b"
         ],
-        "contentPatterns": ["FlashList", "onEndReached", "onRefresh", "ListRenderItem"]
-      },
-      "excludePatterns": ["todo list", "checklist", "list of"]
-    },
-    "modal-actionsheet": {
-      "description": "Modal and Actionsheet overlay patterns",
-      "priority": 5,
-      "triggers": {
-        "keywords": ["modal", "actionsheet", "bottom sheet", "overlay", "dialog", "popup", "sheet"],
-        "keywordPatterns": ["\\bmodal\\b", "\\bsheet\\b", "\\boverlay\\b", "\\bdialog\\b"],
-        "pathPatterns": ["**/*Modal.tsx", "**/*Sheet.tsx", "**/*Dialog.tsx", "**/modals/**"],
         "intentPatterns": [
-          "(?:show|open|display).*(?:modal|sheet|dialog)",
-          "(?:create|add).*(?:modal|sheet|overlay)"
-        ],
-        "contentPatterns": ["Actionsheet", "Modal", "useDisclose"]
-      }
-    },
-    "maestro-e2e": {
-      "description": "Maestro end-to-end testing for React Native",
-      "priority": 6,
-      "triggers": {
-        "keywords": ["e2e", "maestro", "end-to-end", "integration test", "ui test"],
-        "keywordPatterns": ["\\be2e\\b", "\\bmaestro\\b", "end.to.end"],
-        "pathPatterns": [".maestro/**", ".maestro/**/*.yaml", "**/e2e/**"],
-        "intentPatterns": [
-          "(?:write|add|create).*(?:e2e|maestro|integration)",
-          "(?:test).*(?:flow|journey|scenario)"
-        ],
-        "contentPatterns": ["appId:", "- tap", "- assertVisible"]
-      }
-    },
-    "react-ui-patterns": {
-      "description": "React patterns, hooks, loading states, error handling",
-      "priority": 6,
-      "triggers": {
-        "keywords": ["react", "hook", "useeffect", "usestate", "usememo", "useref", "loading", "suspense"],
-        "keywordPatterns": ["\\buse[A-Z]\\w+\\b", "\\bhook\\b"],
-        "pathPatterns": ["**/hooks/**", "**/use*.ts", "**/use*.tsx"],
-        "intentPatterns": [
-          "(?:create|write).*(?:hook|custom hook)",
-          "(?:handle).*(?:loading|error|async)"
-        ],
-        "contentPatterns": ["useState", "useEffect", "useCallback", "useMemo"]
-      },
-      "excludePatterns": ["test", "jest"]
-    },
-    "receiving-code-review": {
-      "description": "Handle code review feedback with rigor",
-      "priority": 4,
-      "triggers": {
-        "keywords": ["code review", "pr feedback", "review comment", "pr comment", "reviewer"],
-        "keywordPatterns": ["code.review", "pr.feedback", "review.comment"],
-        "intentPatterns": [
-          "(?:respond|address|handle).*(?:review|feedback|comment)",
-          "(?:reviewer).*(?:said|suggested|asked)"
-        ],
-        "contextPatterns": ["from the reviewer", "in the pr", "review feedback"]
-      }
-    },
-    "documentation": {
-      "description": "Documentation standards and TSDoc",
-      "priority": 3,
-      "triggers": {
-        "keywords": ["documentation", "tsdoc", "jsdoc", "readme", "docs"],
-        "keywordPatterns": ["\\bdoc(?:s|umentation)?\\b", "\\breadme\\b"],
-        "pathPatterns": ["**/docs/**", "**/*.md", "**/README*"],
-        "intentPatterns": [
-          "(?:write|add|update).*(?:doc|documentation)",
-          "(?:document).*(?:function|component|api)"
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:analytics|tracking)\\b"
         ]
       }
     },
-    "typescript-conventions": {
-      "description": "TypeScript strict mode and conventions",
+    "app-store-optimization": {
+      "description": "App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking mobile app performance on Apple App Store and Google Play Store.",
       "priority": 5,
+      "domain": "marketing",
       "triggers": {
-        "keywords": ["typescript", "type", "interface", "generic", "strict mode"],
-        "keywordPatterns": ["\\btype\\b", "\\binterface\\b", "\\bgeneric\\b"],
-        "pathPatterns": ["**/*.d.ts", "**/types/**", "**/types.ts"],
-        "intentPatterns": [
-          "(?:define|create).*(?:type|interface)",
-          "(?:type).*(?:error|issue)"
+        "keywords": [
+          "app",
+          "store",
+          "optimization",
+          "toolkit",
+          "researching",
+          "keywords",
+          "optimizing",
+          "metadata",
+          "tracking",
+          "mobile",
+          "performance",
+          "apple"
         ],
-        "contentPatterns": ["interface ", "type ", ": unknown", "as const"]
-      },
-      "excludePatterns": ["issue type", "type of bug"]
+        "keywordPatterns": [
+          "\\bapp\\-store\\-optimization\\b",
+          "\\bapp\\ store\\ optimization\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:app|store|optimization)\\b"
+        ]
+      }
     },
-    "verification-before-completion": {
-      "description": "Evidence-based completion claims protocol",
+    "campaign-analytics": {
+      "description": "Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "campaign",
+          "analytics",
+          "analyzes",
+          "performance",
+          "multi-touch",
+          "attribution",
+          "funnel",
+          "conversion",
+          "roi",
+          "calculation",
+          "marketing",
+          "optimization"
+        ],
+        "keywordPatterns": [
+          "\\bcampaign\\-analytics\\b",
+          "\\bcampaign\\ analytics\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:campaign|analytics)\\b"
+        ]
+      }
+    },
+    "churn-prevention": {
+      "description": "Reduce voluntary and involuntary churn through cancel flow design, save offers, exit surveys, and dunning sequences. Use when designing or optimizing a cancel f",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "churn",
+          "prevention",
+          "reduce",
+          "voluntary",
+          "involuntary",
+          "through",
+          "cancel",
+          "flow",
+          "save",
+          "offers",
+          "exit",
+          "surveys",
+          "dunning"
+        ],
+        "keywordPatterns": [
+          "\\bchurn\\-prevention\\b",
+          "\\bchurn\\ prevention\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:churn|prevention)\\b"
+        ]
+      }
+    },
+    "cold-email": {
+      "description": "When the user wants to write, improve, or build a sequence of B2B cold outreach emails to prospects who haven't asked to hear from them. Use when the user menti",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "cold",
+          "email",
+          "user",
+          "improve",
+          "sequence",
+          "b2b",
+          "outreach",
+          "emails",
+          "prospects",
+          "haven",
+          "asked",
+          "hear",
+          "mentions"
+        ],
+        "keywordPatterns": [
+          "\\bcold\\-email\\b",
+          "\\bcold\\ email\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:cold|email)\\b"
+        ]
+      }
+    },
+    "competitor-alternatives": {
+      "description": "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs p",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "competitor",
+          "alternatives",
+          "user",
+          "comparison",
+          "alternative",
+          "pages",
+          "seo",
+          "sales",
+          "enablement",
+          "mentions",
+          "page",
+          "product",
+          "competitive"
+        ],
+        "keywordPatterns": [
+          "\\bcompetitor\\-alternatives\\b",
+          "\\bcompetitor\\ alternatives\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:competitor|alternatives)\\b"
+        ]
+      }
+    },
+    "content-creator": {
+      "description": "DEPRECATED \u2014 Use content-production for full content pipeline, or content-strategy for planning. This skill redirects to the appropriate specialist.",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "content",
+          "creator",
+          "deprecated",
+          "content-production",
+          "pipeline",
+          "content-strategy",
+          "planning",
+          "redirects",
+          "appropriate",
+          "specialist"
+        ],
+        "keywordPatterns": [
+          "\\bcontent\\-creator\\b",
+          "\\bcontent\\ creator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:content|creator)\\b"
+        ]
+      }
+    },
+    "content-humanizer": {
+      "description": "Makes AI-generated content sound genuinely human \u2014 not just cleaned up, but alive. Use when content feels robotic, uses too many AI clich\u00e9s, lacks personality, ",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "content",
+          "humanizer",
+          "ai-generated",
+          "sound",
+          "genuinely",
+          "human",
+          "just",
+          "cleaned",
+          "alive",
+          "feels",
+          "robotic",
+          "too",
+          "many"
+        ],
+        "keywordPatterns": [
+          "\\bcontent\\-humanizer\\b",
+          "\\bcontent\\ humanizer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:content|humanizer)\\b"
+        ]
+      }
+    },
+    "content-production": {
+      "description": "Full content production pipeline \u2014 takes a topic from blank page to published-ready piece. Use when you need to execute content: write a blog post, article, or ",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "content",
+          "pipeline",
+          "takes",
+          "topic",
+          "blank",
+          "page",
+          "published-ready",
+          "piece",
+          "execute",
+          "blog",
+          "post",
+          "article"
+        ],
+        "keywordPatterns": [
+          "\\bcontent\\-production\\b",
+          "\\bcontent\\ production\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:content)\\b"
+        ]
+      }
+    },
+    "content-strategy": {
+      "description": "When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions \\\"content str",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "content",
+          "strategy",
+          "user",
+          "plan",
+          "decide",
+          "figure",
+          "out",
+          "topics",
+          "mentions",
+          "should",
+          "about",
+          "ideas"
+        ],
+        "keywordPatterns": [
+          "\\bcontent\\-strategy\\b",
+          "\\bcontent\\ strategy\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:content|strategy)\\b"
+        ]
+      }
+    },
+    "copy-editing": {
+      "description": "When the user wants to edit, review, or improve existing marketing copy. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'p",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "copy",
+          "editing",
+          "user",
+          "edit",
+          "improve",
+          "existing",
+          "marketing",
+          "mentions",
+          "feedback",
+          "proofread",
+          "polish",
+          "better",
+          "sweep"
+        ],
+        "keywordPatterns": [
+          "\\bcopy\\-editing\\b",
+          "\\bcopy\\ editing\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:copy|editing)\\b"
+        ]
+      }
+    },
+    "copywriting": {
+      "description": "When the user wants to write, rewrite, or improve marketing copy for any page \u2014 including homepage, landing pages, pricing pages, feature pages, about pages, or",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "copywriting",
+          "user",
+          "rewrite",
+          "improve",
+          "marketing",
+          "copy",
+          "page",
+          "homepage",
+          "landing",
+          "pages",
+          "pricing",
+          "feature",
+          "about"
+        ],
+        "keywordPatterns": [
+          "\\bcopywriting\\b",
+          "\\bcopywriting\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:copywriting)\\b"
+        ]
+      }
+    },
+    "email-sequence": {
+      "description": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \"e",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "email",
+          "sequence",
+          "user",
+          "optimize",
+          "drip",
+          "campaign",
+          "automated",
+          "flow",
+          "lifecycle",
+          "program",
+          "mentions",
+          "nurture"
+        ],
+        "keywordPatterns": [
+          "\\bemail\\-sequence\\b",
+          "\\bemail\\ sequence\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:email|sequence)\\b"
+        ]
+      }
+    },
+    "form-cro": {
+      "description": "When the user wants to optimize any form that is NOT signup/registration \u2014 including lead capture forms, contact forms, demo request forms, application forms, s",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "form",
+          "cro",
+          "user",
+          "optimize",
+          "signup",
+          "registration",
+          "lead",
+          "capture",
+          "forms",
+          "contact",
+          "demo",
+          "request",
+          "application"
+        ],
+        "keywordPatterns": [
+          "\\bform\\-cro\\b",
+          "\\bform\\ cro\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:form|cro)\\b"
+        ]
+      }
+    },
+    "free-tool-strategy": {
+      "description": "When the user wants to build a free tool for marketing \u2014 lead generation, SEO value, or brand awareness. Use when they mention 'engineering as marketing,' 'free",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "free",
+          "tool",
+          "strategy",
+          "user",
+          "marketing",
+          "lead",
+          "generation",
+          "seo",
+          "value",
+          "brand",
+          "awareness",
+          "mention",
+          "engineering"
+        ],
+        "keywordPatterns": [
+          "\\bfree\\-tool\\-strategy\\b",
+          "\\bfree\\ tool\\ strategy\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:free|tool|strategy)\\b"
+        ]
+      }
+    },
+    "launch-strategy": {
+      "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature rele",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "launch",
+          "strategy",
+          "user",
+          "plan",
+          "product",
+          "feature",
+          "announcement",
+          "release",
+          "mentions",
+          "hunt",
+          "go-to-market",
+          "beta"
+        ],
+        "keywordPatterns": [
+          "\\blaunch\\-strategy\\b",
+          "\\blaunch\\ strategy\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:launch|strategy)\\b"
+        ]
+      }
+    },
+    "marketing-context": {
+      "description": "Create and maintain the marketing context document that all marketing skills read before starting. Use when the user mentions 'marketing context,' 'brand voice,",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "marketing",
+          "context",
+          "maintain",
+          "document",
+          "read",
+          "starting",
+          "user",
+          "mentions",
+          "brand",
+          "voice",
+          "target",
+          "audience"
+        ],
+        "keywordPatterns": [
+          "\\bmarketing\\-context\\b",
+          "\\bmarketing\\ context\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:marketing|context)\\b"
+        ]
+      }
+    },
+    "marketing-demand-acquisition": {
+      "description": "Multi-channel demand generation, paid media optimization, SEO strategy, and partnership programs for Series A+ startups",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "marketing",
+          "demand",
+          "acquisition",
+          "multi-channel",
+          "generation",
+          "paid",
+          "media",
+          "optimization",
+          "seo",
+          "strategy",
+          "partnership",
+          "programs",
+          "series",
+          "startups"
+        ],
+        "keywordPatterns": [
+          "\\bmarketing\\-demand\\-acquisition\\b",
+          "\\bmarketing\\ demand\\ acquisition\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:marketing|demand|acquisition)\\b"
+        ]
+      }
+    },
+    "marketing-ideas": {
+      "description": "When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth i",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "marketing",
+          "ideas",
+          "user",
+          "inspiration",
+          "strategies",
+          "saas",
+          "software",
+          "product",
+          "asks",
+          "growth",
+          "market",
+          "tactics"
+        ],
+        "keywordPatterns": [
+          "\\bmarketing\\-ideas\\b",
+          "\\bmarketing\\ ideas\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:marketing|ideas)\\b"
+        ]
+      }
+    },
+    "marketing-ops": {
+      "description": "Central router for the marketing skill ecosystem. Use when unsure which marketing skill to use, when orchestrating a multi-skill campaign, or when coordinating ",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "marketing",
+          "ops",
+          "central",
+          "router",
+          "ecosystem",
+          "unsure",
+          "orchestrating",
+          "multi-skill",
+          "campaign",
+          "coordinating",
+          "content",
+          "seo",
+          "cro"
+        ],
+        "keywordPatterns": [
+          "\\bmarketing\\-ops\\b",
+          "\\bmarketing\\ ops\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:marketing|ops)\\b"
+        ]
+      }
+    },
+    "marketing-psychology": {
+      "description": "When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental ",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "marketing",
+          "psychology",
+          "user",
+          "apply",
+          "psychological",
+          "principles",
+          "mental",
+          "models",
+          "behavioral",
+          "science",
+          "mentions",
+          "cognitive"
+        ],
+        "keywordPatterns": [
+          "\\bmarketing\\-psychology\\b",
+          "\\bmarketing\\ psychology\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:marketing|psychology)\\b"
+        ]
+      }
+    },
+    "marketing-strategy-pmm": {
+      "description": "Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Covers April Dunford positioning, ICP definition, competi",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "marketing",
+          "strategy",
+          "pmm",
+          "product",
+          "positioning",
+          "gtm",
+          "competitive",
+          "intelligence",
+          "launches",
+          "april",
+          "dunford",
+          "icp",
+          "definition"
+        ],
+        "keywordPatterns": [
+          "\\bmarketing\\-strategy\\-pmm\\b",
+          "\\bmarketing\\ strategy\\ pmm\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:marketing|strategy|pmm)\\b"
+        ]
+      }
+    },
+    "onboarding-cro": {
+      "description": "When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions \"onboarding flo",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "onboarding",
+          "cro",
+          "user",
+          "optimize",
+          "post-signup",
+          "activation",
+          "first-run",
+          "experience",
+          "time-to-value",
+          "mentions",
+          "flow",
+          "rate",
+          "empty"
+        ],
+        "keywordPatterns": [
+          "\\bonboarding\\-cro\\b",
+          "\\bonboarding\\ cro\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:onboarding|cro)\\b"
+        ]
+      }
+    },
+    "page-cro": {
+      "description": "When the user wants to optimize, improve, or increase conversions on any marketing page \u2014 including homepage, landing pages, pricing pages, feature pages, or bl",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "page",
+          "cro",
+          "user",
+          "optimize",
+          "improve",
+          "increase",
+          "conversions",
+          "marketing",
+          "homepage",
+          "landing",
+          "pages",
+          "pricing",
+          "feature"
+        ],
+        "keywordPatterns": [
+          "\\bpage\\-cro\\b",
+          "\\bpage\\ cro\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:page|cro)\\b"
+        ]
+      }
+    },
+    "paid-ads": {
+      "description": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "paid",
+          "ads",
+          "user",
+          "advertising",
+          "campaigns",
+          "google",
+          "meta",
+          "facebook",
+          "instagram",
+          "linkedin",
+          "twitter",
+          "other"
+        ],
+        "keywordPatterns": [
+          "\\bpaid\\-ads\\b",
+          "\\bpaid\\ ads\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:paid|ads)\\b"
+        ]
+      }
+    },
+    "paywall-upgrade-cro": {
+      "description": "When the user wants to create or optimize in-app paywalls, upgrade screens, upsell modals, or feature gates. Also use when the user mentions \"paywall,\" \"upgrade",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "paywall",
+          "upgrade",
+          "cro",
+          "user",
+          "optimize",
+          "in-app",
+          "paywalls",
+          "screens",
+          "upsell",
+          "modals",
+          "feature",
+          "gates",
+          "mentions"
+        ],
+        "keywordPatterns": [
+          "\\bpaywall\\-upgrade\\-cro\\b",
+          "\\bpaywall\\ upgrade\\ cro\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:paywall|upgrade|cro)\\b"
+        ]
+      }
+    },
+    "popup-cro": {
+      "description": "When the user wants to create or optimize popups, modals, overlays, slide-ins, or banners for conversion purposes. Also use when the user mentions \"exit intent,",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "popup",
+          "cro",
+          "user",
+          "optimize",
+          "popups",
+          "modals",
+          "overlays",
+          "slide-ins",
+          "banners",
+          "conversion",
+          "purposes",
+          "mentions",
+          "exit",
+          "intent"
+        ],
+        "keywordPatterns": [
+          "\\bpopup\\-cro\\b",
+          "\\bpopup\\ cro\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:popup|cro)\\b"
+        ]
+      }
+    },
+    "pricing-strategy": {
+      "description": "Design, optimize, and communicate SaaS pricing \u2014 tier structure, value metrics, pricing pages, and price increase strategy. Use when building a pricing model fr",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "pricing",
+          "strategy",
+          "optimize",
+          "communicate",
+          "saas",
+          "tier",
+          "structure",
+          "value",
+          "metrics",
+          "pages",
+          "price",
+          "increase"
+        ],
+        "keywordPatterns": [
+          "\\bpricing\\-strategy\\b",
+          "\\bpricing\\ strategy\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:pricing|strategy)\\b"
+        ]
+      }
+    },
+    "programmatic-seo": {
+      "description": "When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions \"programmatic SEO,\" \"template pages,\" \"pages a",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "programmatic",
+          "seo",
+          "user",
+          "seo-driven",
+          "pages",
+          "scale",
+          "templates",
+          "mentions",
+          "template",
+          "directory",
+          "location",
+          "keyword"
+        ],
+        "keywordPatterns": [
+          "\\bprogrammatic\\-seo\\b",
+          "\\bprogrammatic\\ seo\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:programmatic|seo)\\b"
+        ]
+      }
+    },
+    "prompt-engineer-toolkit": {
+      "description": "When the user wants to improve prompts for AI-assisted marketing, build prompt templates, or optimize AI content workflows. Also use when the user mentions 'pro",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "prompt",
+          "engineer",
+          "toolkit",
+          "user",
+          "improve",
+          "prompts",
+          "ai-assisted",
+          "marketing",
+          "templates",
+          "optimize",
+          "content",
+          "workflows",
+          "mentions",
+          "engineering"
+        ],
+        "keywordPatterns": [
+          "\\bprompt\\-engineer\\-toolkit\\b",
+          "\\bprompt\\ engineer\\ toolkit\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:prompt|engineer|toolkit)\\b"
+        ]
+      }
+    },
+    "referral-program": {
+      "description": "When the user wants to design, launch, or optimize a referral or affiliate program. Use when they mention 'referral program,' 'affiliate program,' 'word of mout",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "referral",
+          "program",
+          "user",
+          "launch",
+          "optimize",
+          "affiliate",
+          "mention",
+          "word",
+          "mouth",
+          "refer",
+          "friend",
+          "incentive"
+        ],
+        "keywordPatterns": [
+          "\\breferral\\-program\\b",
+          "\\breferral\\ program\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:referral|program)\\b"
+        ]
+      }
+    },
+    "schema-markup": {
+      "description": "When the user wants to implement, audit, or validate structured data (schema markup) on their website. Use when the user mentions 'structured data,' 'schema.org",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "schema",
+          "markup",
+          "user",
+          "implement",
+          "audit",
+          "validate",
+          "structured",
+          "website",
+          "mentions",
+          "schema.org",
+          "json-ld",
+          "rich"
+        ],
+        "keywordPatterns": [
+          "\\bschema\\-markup\\b",
+          "\\bschema\\ markup\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:schema|markup)\\b"
+        ]
+      }
+    },
+    "seo-audit": {
+      "description": "When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I not ranking,",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "seo",
+          "audit",
+          "user",
+          "diagnose",
+          "issues",
+          "site",
+          "mentions",
+          "technical",
+          "ranking",
+          "on-page",
+          "meta",
+          "tags"
+        ],
+        "keywordPatterns": [
+          "\\bseo\\-audit\\b",
+          "\\bseo\\ audit\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:seo|audit)\\b"
+        ]
+      }
+    },
+    "signup-flow-cro": {
+      "description": "When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions \"signup conversions,\" \"regist",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "signup",
+          "flow",
+          "cro",
+          "user",
+          "optimize",
+          "registration",
+          "account",
+          "creation",
+          "trial",
+          "activation",
+          "flows",
+          "mentions",
+          "conversions",
+          "friction"
+        ],
+        "keywordPatterns": [
+          "\\bsignup\\-flow\\-cro\\b",
+          "\\bsignup\\ flow\\ cro\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:signup|flow|cro)\\b"
+        ]
+      }
+    },
+    "site-architecture": {
+      "description": "When the user wants to audit, redesign, or plan their website's structure, URL hierarchy, navigation design, or internal linking strategy. Use when the user men",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "site",
+          "architecture",
+          "user",
+          "audit",
+          "redesign",
+          "plan",
+          "website",
+          "structure",
+          "url",
+          "hierarchy",
+          "navigation",
+          "internal",
+          "linking",
+          "strategy"
+        ],
+        "keywordPatterns": [
+          "\\bsite\\-architecture\\b",
+          "\\bsite\\ architecture\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:site|architecture)\\b"
+        ]
+      }
+    },
+    "social-content": {
+      "description": "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "social",
+          "content",
+          "user",
+          "scheduling",
+          "optimizing",
+          "media",
+          "linkedin",
+          "twitter",
+          "instagram",
+          "tiktok",
+          "facebook",
+          "other"
+        ],
+        "keywordPatterns": [
+          "\\bsocial\\-content\\b",
+          "\\bsocial\\ content\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:social|content)\\b"
+        ]
+      }
+    },
+    "social-media-analyzer": {
+      "description": "Social media campaign analysis and performance tracking. Calculates engagement rates, ROI, and benchmarks across platforms. Use for analyzing social media perfo",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "social",
+          "media",
+          "analyzer",
+          "campaign",
+          "performance",
+          "tracking",
+          "calculates",
+          "engagement",
+          "rates",
+          "roi",
+          "benchmarks",
+          "platforms",
+          "analyzing"
+        ],
+        "keywordPatterns": [
+          "\\bsocial\\-media\\-analyzer\\b",
+          "\\bsocial\\ media\\ analyzer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:social|media|analyzer)\\b"
+        ]
+      }
+    },
+    "social-media-manager": {
+      "description": "When the user wants to develop social media strategy, plan content calendars, manage community engagement, or grow their social presence across platforms. Also ",
+      "priority": 5,
+      "domain": "marketing",
+      "triggers": {
+        "keywords": [
+          "social",
+          "media",
+          "manager",
+          "user",
+          "develop",
+          "strategy",
+          "plan",
+          "content",
+          "calendars",
+          "community",
+          "engagement",
+          "grow",
+          "presence"
+        ],
+        "keywordPatterns": [
+          "\\bsocial\\-media\\-manager\\b",
+          "\\bsocial\\ media\\ manager\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:social|media|manager)\\b"
+        ]
+      }
+    },
+    "agile-product-owner": {
+      "description": "Agile product ownership for backlog management and sprint execution. Covers user story writing, acceptance criteria, sprint planning, and velocity tracking. Use",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "agile",
+          "product",
+          "owner",
+          "ownership",
+          "backlog",
+          "management",
+          "sprint",
+          "execution",
+          "user",
+          "story",
+          "acceptance",
+          "criteria",
+          "planning"
+        ],
+        "keywordPatterns": [
+          "\\bagile\\-product\\-owner\\b",
+          "\\bagile\\ product\\ owner\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:agile|product|owner)\\b"
+        ]
+      }
+    },
+    "competitive-teardown": {
+      "description": "Run a structured competitive analysis from pricing pages, app store reviews, job postings, SEO and social signals, producing feature matrices, SWOT, positioning",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "competitive",
+          "teardown",
+          "structured",
+          "pricing",
+          "pages",
+          "app",
+          "store",
+          "job",
+          "postings",
+          "seo",
+          "social",
+          "signals",
+          "producing"
+        ],
+        "keywordPatterns": [
+          "\\bcompetitive\\-teardown\\b",
+          "\\bcompetitive\\ teardown\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:competitive|teardown)\\b"
+        ]
+      }
+    },
+    "landing-page-generator": {
+      "description": "Generate high-converting landing pages from a product description: Next.js/React components with section variants, proven copy frameworks, SEO meta and performa",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "landing",
+          "page",
+          "generator",
+          "high-converting",
+          "pages",
+          "product",
+          "description",
+          "next.js",
+          "react",
+          "components",
+          "section",
+          "variants",
+          "proven",
+          "copy"
+        ],
+        "keywordPatterns": [
+          "\\blanding\\-page\\-generator\\b",
+          "\\blanding\\ page\\ generator\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:landing|page|generator)\\b"
+        ]
+      }
+    },
+    "product-manager-toolkit": {
+      "description": "Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market str",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "product",
+          "manager",
+          "toolkit",
+          "comprehensive",
+          "managers",
+          "rice",
+          "prioritization",
+          "customer",
+          "interview",
+          "prd",
+          "templates",
+          "discovery",
+          "frameworks"
+        ],
+        "keywordPatterns": [
+          "\\bproduct\\-manager\\-toolkit\\b",
+          "\\bproduct\\ manager\\ toolkit\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:product|manager|toolkit)\\b"
+        ]
+      }
+    },
+    "product-strategist": {
+      "description": "Strategic product leadership toolkit for Head of Product including OKR cascade generation, market analysis, vision setting, and team scaling. Use for strategic ",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "product",
+          "strategist",
+          "strategic",
+          "leadership",
+          "toolkit",
+          "head",
+          "okr",
+          "cascade",
+          "generation",
+          "market",
+          "vision",
+          "setting",
+          "scaling"
+        ],
+        "keywordPatterns": [
+          "\\bproduct\\-strategist\\b",
+          "\\bproduct\\ strategist\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:product|strategist)\\b"
+        ]
+      }
+    },
+    "saas-scaffolder": {
+      "description": "Scaffold a production-ready SaaS from a product brief: Next.js App Router with TypeScript, Tailwind and shadcn/ui, wired to auth, database, payments and a worki",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "saas",
+          "scaffolder",
+          "scaffold",
+          "production-ready",
+          "product",
+          "brief",
+          "next.js",
+          "app",
+          "router",
+          "typescript",
+          "tailwind",
+          "shadcn",
+          "wired"
+        ],
+        "keywordPatterns": [
+          "\\bsaas\\-scaffolder\\b",
+          "\\bsaas\\ scaffolder\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:saas|scaffolder)\\b"
+        ]
+      }
+    },
+    "ui-design-system": {
+      "description": "UI design system toolkit for Senior UI Designer including design token generation, component documentation, responsive design calculations, and developer handof",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "system",
+          "toolkit",
+          "senior",
+          "designer",
+          "token",
+          "generation",
+          "component",
+          "documentation",
+          "responsive",
+          "calculations",
+          "developer",
+          "handoff"
+        ],
+        "keywordPatterns": [
+          "\\bui\\-design\\-system\\b",
+          "\\bui\\ design\\ system\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:system)\\b"
+        ]
+      }
+    },
+    "ux-researcher-designer": {
+      "description": "UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and re",
+      "priority": 5,
+      "domain": "product",
+      "triggers": {
+        "keywords": [
+          "researcher",
+          "designer",
+          "research",
+          "toolkit",
+          "senior",
+          "data-driven",
+          "persona",
+          "generation",
+          "journey",
+          "mapping",
+          "usability",
+          "testing"
+        ],
+        "keywordPatterns": [
+          "\\bux\\-researcher\\-designer\\b",
+          "\\bux\\ researcher\\ designer\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:researcher|designer)\\b"
+        ]
+      }
+    },
+    "atlassian-admin": {
+      "description": "Atlassian Administrator for managing and organizing Atlassian products, users, customization of the Atlassian suite, permissions, security, integrations, system",
+      "priority": 5,
+      "domain": "project-management",
+      "triggers": {
+        "keywords": [
+          "atlassian",
+          "admin",
+          "administrator",
+          "organizing",
+          "products",
+          "users",
+          "customization",
+          "suite",
+          "permissions",
+          "security",
+          "integrations",
+          "system",
+          "configuration"
+        ],
+        "keywordPatterns": [
+          "\\batlassian\\-admin\\b",
+          "\\batlassian\\ admin\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:atlassian|admin)\\b"
+        ]
+      }
+    },
+    "atlassian-templates": {
+      "description": "Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira and Confluence templates, blueprints, custom layouts, reusable c",
+      "priority": 5,
+      "domain": "project-management",
+      "triggers": {
+        "keywords": [
+          "atlassian",
+          "templates",
+          "template",
+          "creator",
+          "modifier",
+          "expert",
+          "modifying",
+          "jira",
+          "confluence",
+          "blueprints",
+          "custom",
+          "layouts"
+        ],
+        "keywordPatterns": [
+          "\\batlassian\\-templates\\b",
+          "\\batlassian\\ templates\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:atlassian|templates)\\b"
+        ]
+      }
+    },
+    "confluence-expert": {
+      "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation, planning, product discovery, page layouts, macros, templates, and ",
+      "priority": 5,
+      "domain": "project-management",
+      "triggers": {
+        "keywords": [
+          "confluence",
+          "expert",
+          "atlassian",
+          "spaces",
+          "knowledge",
+          "bases",
+          "documentation",
+          "planning",
+          "product",
+          "discovery",
+          "page",
+          "layouts"
+        ],
+        "keywordPatterns": [
+          "\\bconfluence\\-expert\\b",
+          "\\bconfluence\\ expert\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:confluence|expert)\\b"
+        ]
+      }
+    },
+    "jira-expert": {
+      "description": "Atlassian Jira expert for creating and managing projects, planning, product discovery, JQL queries, workflows, custom fields, automation, reporting, and all Jir",
+      "priority": 5,
+      "domain": "project-management",
+      "triggers": {
+        "keywords": [
+          "jira",
+          "expert",
+          "atlassian",
+          "planning",
+          "product",
+          "discovery",
+          "jql",
+          "queries",
+          "workflows",
+          "custom",
+          "fields",
+          "automation"
+        ],
+        "keywordPatterns": [
+          "\\bjira\\-expert\\b",
+          "\\bjira\\ expert\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:jira|expert)\\b"
+        ]
+      }
+    },
+    "scrum-master": {
+      "description": "Advanced Scrum Master with data-driven team health analysis, velocity forecasting, retrospective insights, and team development expertise. Features comprehensiv",
+      "priority": 5,
+      "domain": "project-management",
+      "triggers": {
+        "keywords": [
+          "scrum",
+          "master",
+          "advanced",
+          "data-driven",
+          "health",
+          "velocity",
+          "forecasting",
+          "retrospective",
+          "insights",
+          "development",
+          "expertise",
+          "features"
+        ],
+        "keywordPatterns": [
+          "\\bscrum\\-master\\b",
+          "\\bscrum\\ master\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:scrum|master)\\b"
+        ]
+      }
+    },
+    "senior-pm": {
+      "description": "Senior Project Manager for enterprise software, SaaS, and digital transformation projects. Specializes in portfolio management, quantitative risk analysis, reso",
+      "priority": 5,
+      "domain": "project-management",
+      "triggers": {
+        "keywords": [
+          "senior",
+          "manager",
+          "enterprise",
+          "software",
+          "saas",
+          "digital",
+          "transformation",
+          "specializes",
+          "portfolio",
+          "management",
+          "quantitative",
+          "risk"
+        ],
+        "keywordPatterns": [
+          "\\bsenior\\-pm\\b",
+          "\\bsenior\\ pm\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:senior)\\b"
+        ]
+      }
+    },
+    "fastapi-patterns": {
+      "description": "FastAPI backend patterns for API development. Use when creating or modifying FastAPI endpoints, services, schemas, dependencies, or background tasks. Covers pro",
       "priority": 8,
+      "domain": "reference",
       "triggers": {
-        "keywords": ["verify", "check", "confirm", "done", "complete", "finished"],
-        "intentPatterns": [
-          "(?:is it|are we).*(?:done|complete|finished)",
-          "(?:verify|check|confirm).*(?:works|passes)"
+        "keywords": [
+          "fastapi",
+          "patterns",
+          "backend",
+          "api",
+          "development",
+          "modifying",
+          "endpoints",
+          "services",
+          "schemas",
+          "dependencies",
+          "background",
+          "tasks"
         ],
-        "contextPatterns": ["before claiming", "make sure", "double check"]
+        "keywordPatterns": [
+          "\\bfastapi\\-patterns\\b",
+          "\\bfastapi\\ patterns\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:fastapi|patterns)\\b"
+        ]
       }
     },
-    "defense-in-depth": {
-      "description": "Multi-layer validation for bug prevention",
-      "priority": 6,
+    "perf-profiler": {
+      "description": "Performance profiling for Python and PostgreSQL. Use when diagnosing slow endpoints, finding CPU/memory bottlenecks, optimizing database queries, detecting N+1 ",
+      "priority": 8,
+      "domain": "reference",
       "triggers": {
-        "keywords": ["validation", "guard", "defense", "layer", "prevent"],
+        "keywords": [
+          "perf",
+          "profiler",
+          "performance",
+          "profiling",
+          "python",
+          "postgresql",
+          "diagnosing",
+          "slow",
+          "endpoints",
+          "finding",
+          "cpu",
+          "memory",
+          "bottlenecks",
+          "optimizing"
+        ],
+        "keywordPatterns": [
+          "\\bperf\\-profiler\\b",
+          "\\bperf\\ profiler\\b"
+        ],
         "intentPatterns": [
-          "(?:prevent|avoid).*(?:bug|error|issue)",
-          "(?:add).*(?:validation|guard|check)"
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:perf|profiler)\\b"
         ]
-      },
-      "relatedSkills": ["systematic-debugging"]
+      }
+    },
+    "postgres-optimization": {
+      "description": "PostgreSQL query optimization and schema design patterns. Use when writing SQL queries, creating indexes, designing schemas, reviewing slow queries, or working ",
+      "priority": 8,
+      "domain": "reference",
+      "triggers": {
+        "keywords": [
+          "postgres",
+          "optimization",
+          "postgresql",
+          "query",
+          "schema",
+          "patterns",
+          "sql",
+          "queries",
+          "indexes",
+          "schemas",
+          "reviewing",
+          "slow",
+          "alembic"
+        ],
+        "keywordPatterns": [
+          "\\bpostgres\\-optimization\\b",
+          "\\bpostgres\\ optimization\\b"
+        ],
+        "intentPatterns": [
+          "(?:create|add|write|build|design|review|audit|fix|debug|generate).*\\b(?:postgres|optimization)\\b"
+        ]
+      }
     }
   }
 }

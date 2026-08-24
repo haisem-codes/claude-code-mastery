@@ -4,14 +4,14 @@
 
 **The definitive guide to configuring Claude Code for maximum performance**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-179%2B-green)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT*-blue.svg)](#license)
+[![Skills](https://img.shields.io/badge/Skills-168-green)]()
 [![Agents](https://img.shields.io/badge/Agents-37-purple)]()
-[![Hooks](https://img.shields.io/badge/Hooks-10-orange)]()
+[![Hooks](https://img.shields.io/badge/Hooks-8-orange)]()
 
-*179+ curated skills, 37 specialized agents, battle-tested templates, and a single prompt that builds your entire setup.*
+*168 skills, 37 subagents, real working example configs, and an installer that sets up your machine in one command.*
 
-[Quick Start](#-quick-start) | [Skills](#-skill-library) | [Agents](#-agent-collection) | [Guide](#-learning-path) | [Templates](#-configuration-templates)
+[Quick Start](#quick-start) | [Skills](#skill-library) | [Agents](#agent-collection) | [Examples](examples/) | [Guide](#learning-path)
 
 </div>
 
@@ -21,42 +21,71 @@
 
 Stop configuring Claude Code by trial and error. This repository gives you:
 
-- **One-prompt setup** — Copy a single prompt into Claude Code, answer 5 questions, get a production-grade config
-- **179+ skills** covering engineering, marketing, product, C-suite, compliance, finance, and more
-- **37 specialized agents** for development, infrastructure, security, data/AI, and quality testing
-- **Battle-tested templates** for CLAUDE.md, settings.json, rules, and stack-specific configs
-- **10 hook scripts** for safety gates, auto-formatting, and intelligent skill matching
-- **4 GitHub Actions** for automated PR review, docs sync, and dependency auditing
-- **9-chapter guide** from beginner to advanced
+- **A real installer** — pick a preset, get a configured `~/.claude`. It backs up first, merges instead of overwriting, and can be undone.
+- **168 skills** across engineering, marketing, product, C-suite, compliance and finance
+- **37 subagents** for development, infrastructure, security, data/AI and quality testing
+- **[Working example configs](examples/)** taken from real projects, including a 15-subagent setup
+- **8 hook scripts** for safety gates and auto-formatting, each smoke-tested
+- **Templates** for `CLAUDE.md`, `settings.json`, rules and six stacks
+- **11-chapter guide** from first principles to advanced patterns
+
+Counts come from [`catalog.json`](catalog.json), which is generated and checked in CI, so the numbers on this page cannot drift.
 
 ---
 
 ## Quick Start
 
-### Option 1: The Setup Prompt (Recommended)
+```bash
+git clone https://github.com/haisem-codes/claude-code-mastery.git
+cd claude-code-mastery
+./install.sh --list
+```
 
-Open Claude Code in your project, paste the contents of [`prompt/setup-my-claude.md`](prompt/setup-my-claude.md), and Claude will:
+### Option 1: Let Claude do it (recommended)
 
-1. Analyze your codebase (stack, frameworks, tools)
-2. Ask 5 focused questions about your preferences
-3. Generate personalized global + project configuration
-4. Apply files with your approval
+Open this directory in Claude Code and run:
 
-**What it generates:**
-| File | Purpose |
-|------|---------|
-| `~/.claude/CLAUDE.md` | Global development standards |
-| `~/.claude/settings.json` | Security permissions & hooks |
-| `~/.claude/rules/security.md` | Secret handling rules |
-| `~/.claude/rules/verification.md` | Lint/typecheck/test loop |
-| `.claude/CLAUDE.md` | Project-specific config |
-| `.claude/settings.json` | Project hooks |
+```
+/bootstrap-claude
+```
 
-### Option 2: Manual Setup
+It reads the catalog, asks what kind of work you do, previews the exact changes,
+and applies them. If you are inside a project it will detect your stack first and
+pre-select a matching preset.
 
-1. Copy templates from [`templates/`](templates/) to your `~/.claude/` directory
-2. Install skills from [`skills/`](skills/) to `~/.claude/skills/`
-3. Install agents from [`agents/`](agents/) to `~/.claude/agents/`
+It also clones **11 upstream reference repositories** into `references/` — the
+projects this repo was built from, plus the main community indexes — so Claude
+can search them when you need something the catalog does not cover. See
+[`resources/reference-repos.md`](resources/reference-repos.md).
+
+### Option 2: Install a preset directly
+
+```bash
+./install.sh --preset backend-python --dry-run   # see what would change
+./install.sh --preset backend-python             # apply it
+```
+
+Presets: `backend-python`, `frontend-ts`, `fullstack`, `devops`, `data-ai`,
+`mobile`, `marketing`, `exec`, `minimal`.
+
+### Option 3: Pick individual pieces
+
+```bash
+./install.sh --skills engineering/pr-review-expert,reference/fastapi-patterns \
+             --agents debugger,code-reviewer-pro \
+             --hooks pre-tool-use/block-main-branch
+```
+
+### What the installer guarantees
+
+- **Backs up** `~/.claude` to a timestamped directory before the first write, and prints the restore command
+- **Merges** `settings.json` — your `model`, `env`, `permissions.allow` and any other keys survive; deny rules and hooks are unioned in
+- **Never clobbers your edits** — a file you changed after install is reported and skipped unless you pass `--force`
+- **Reversible** — `./install.sh --uninstall` removes exactly what it installed, leaving your own skills alone
+- **Idempotent** — run it as often as you like; unchanged files are skipped
+
+Requires `python3` and `git`. Install `jq` too, or the safety hooks refuse to run
+rather than failing open.
 
 ---
 
@@ -64,22 +93,24 @@ Open Claude Code in your project, paste the contents of [`prompt/setup-my-claude
 
 | Directory | Contents | Description |
 |-----------|----------|-------------|
-| [`prompt/`](prompt/) | 1 setup prompt | Auto-generates your entire Claude Code config |
-| [`guide/`](guide/) | 9 chapters | Progressive learning from beginner to advanced |
-| [`templates/`](templates/) | 13 files | Global, project, and stack-specific config templates |
-| [`skills/`](skills/) | 179+ skills | Domain knowledge across 11 categories |
-| [`agents/`](agents/) | 37 agents | Specialized AI for delegated tasks |
-| [`hooks/`](hooks/) | 10 scripts | Safety gates, auto-format, skill matching |
-| [`github-actions/`](github-actions/) | 4 workflows | Automated PR review, docs sync, quality, deps |
+| [`install.sh`](install.sh) | the installer | Backup, merge, manifest, uninstall |
+| [`examples/`](examples/) | real configs | Sanitized working setups, incl. a 15-subagent project |
+| [`skills/`](skills/) | 168 skills | Domain knowledge across 11 categories |
+| [`agents/`](agents/) | 37 subagents | Specialized AI for delegated tasks |
+| [`hooks/`](hooks/) | 8 scripts | Safety gates and auto-format, smoke-tested |
+| [`templates/`](templates/) | 13 files | Global, project and per-stack config |
+| [`guide/`](guide/) | 11 chapters | From first principles to advanced patterns |
+| [`prompt/`](prompt/) | 1 prompt | Paste-in fallback if you prefer no scripts |
+| [`github-actions/`](github-actions/) | 4 workflows | PR review, docs sync, quality, deps |
 
 ---
 
 ## Skill Library
 
-179+ production-ready skills organized by domain. Install any skill by copying its directory to `~/.claude/skills/`.
+168 installable skills organized by domain, plus 20 sub-skills bundled inside their parents. Install with `./install.sh --skills <domain>/<skill>` — see [skills/README.md](skills/README.md) for the manual-copy caveats.
 
 <details>
-<summary><b>C-Level Advisory — 29 skills</b></summary>
+<summary><b>C-Level Advisory — 28 skills</b></summary>
 
 CEO, CFO, CMO, CTO, CISO, COO, CHRO, CPO, CRO advisor skills plus board-deck-builder, board-meeting, competitive-intel, company-os, change-management, chief-of-staff, culture-architect, decision-logger, executive-mentor, founder-coach, internal-narrative, intl-expansion, ma-playbook, org-health-diagnostic, scenario-war-room, strategic-alignment, cs-onboard, context-engine, and agent-protocol.
 
@@ -87,7 +118,7 @@ CEO, CFO, CMO, CTO, CISO, COO, CHRO, CPO, CRO advisor skills plus board-deck-bui
 </details>
 
 <details>
-<summary><b>Engineering — 26 skills</b></summary>
+<summary><b>Engineering — 25 skills</b></summary>
 
 | Skill | Description |
 |-------|-------------|
@@ -121,7 +152,7 @@ CEO, CFO, CMO, CTO, CISO, COO, CHRO, CPO, CRO advisor skills plus board-deck-bui
 </details>
 
 <details>
-<summary><b>Engineering Team — 24 skills</b></summary>
+<summary><b>Engineering Team — 23 skills</b></summary>
 
 Senior architect, senior backend, senior frontend, senior fullstack, senior DevOps, senior QA, senior security, senior SecOps, senior data engineer, senior data scientist, senior ML engineer, senior prompt engineer, senior computer vision, AWS solution architect, Playwright pro, self-improving agent, incident commander, code reviewer, email template builder, MS365 tenant manager, Stripe integration expert, TDD guide, tech stack evaluator, and more.
 
@@ -129,7 +160,7 @@ Senior architect, senior backend, senior frontend, senior fullstack, senior DevO
 </details>
 
 <details>
-<summary><b>Marketing — 44 skills</b></summary>
+<summary><b>Marketing — 42 skills</b></summary>
 
 AI SEO, content creator, ad creative, A/B test setup, analytics tracking, app store optimization, brand guidelines, campaign analytics, churn prevention, cold email, content humanizer, content production, content strategy, copy editing, copywriting, email sequence, form CRO, free tool strategy, launch strategy, marketing context, marketing demand acquisition, marketing ideas, marketing ops, marketing psychology, marketing strategy PMM, onboarding CRO, page CRO, paid ads, paywall upgrade CRO, popup CRO, pricing strategy, programmatic SEO, prompt engineer toolkit, referral program, schema markup, SEO audit, signup flow CRO, site architecture, social content, social media analyzer, social media manager, and competitor alternatives.
 
@@ -137,7 +168,7 @@ AI SEO, content creator, ad creative, A/B test setup, analytics tracking, app st
 </details>
 
 <details>
-<summary><b>Product — 9 skills</b></summary>
+<summary><b>Product — 8 skills</b></summary>
 
 Product strategist, agile product owner, competitive teardown, UX researcher-designer, UI design system, SaaS scaffolder, product manager toolkit, landing page generator, and more.
 
@@ -145,7 +176,7 @@ Product strategist, agile product owner, competitive teardown, UX researcher-des
 </details>
 
 <details>
-<summary><b>Project Management — 8 skills</b></summary>
+<summary><b>Project Management — 6 skills</b></summary>
 
 Scrum master, senior PM, Jira expert, Confluence expert, Atlassian admin, and Atlassian templates.
 
@@ -153,7 +184,7 @@ Scrum master, senior PM, Jira expert, Confluence expert, Atlassian admin, and At
 </details>
 
 <details>
-<summary><b>Compliance — 13 skills</b></summary>
+<summary><b>Compliance — 12 skills</b></summary>
 
 FDA consultant specialist, GDPR/DSGVO expert, ISO 27001 information security manager, QMS audit expert, ISMS audit expert, MDR 745 specialist, CAPA officer, quality documentation manager, quality manager QMR, quality manager QMS ISO 13485, regulatory affairs head, risk management specialist.
 
@@ -161,7 +192,7 @@ FDA consultant specialist, GDPR/DSGVO expert, ISO 27001 information security man
 </details>
 
 <details>
-<summary><b>Business Growth — 5 skills</b></summary>
+<summary><b>Business Growth — 4 skills</b></summary>
 
 Sales engineer, revenue operations, customer success manager, contract and proposal writer.
 
@@ -169,7 +200,7 @@ Sales engineer, revenue operations, customer success manager, contract and propo
 </details>
 
 <details>
-<summary><b>Finance — 2 skills</b></summary>
+<summary><b>Finance — 1 skill</b></summary>
 
 Financial analyst.
 
@@ -416,6 +447,8 @@ A progressive guide from zero to production-grade Claude Code setup.
 | 7 | [MCP Servers](guide/07-mcp-servers.md) | Intermediate | External integrations, recommended servers |
 | 8 | [GitHub Actions](guide/08-github-actions.md) | Advanced | CI/CD automation with Claude Code |
 | 9 | [Advanced Patterns](guide/09-advanced-patterns.md) | Advanced | Skill evaluation, worktrees, context management |
+| 10 | [Bootstrapping a Machine](guide/10-bootstrapping.md) | Practical | The installer, merge semantics, re-runs, uninstall |
+| 11 | [Real-World Configurations](guide/11-real-world-configs.md) | Practical | Reading the example configs, incl. a 15-subagent setup |
 
 ---
 
@@ -462,7 +495,17 @@ Contributions welcome! Areas where you can help:
 
 ## License
 
-MIT License — see [LICENSE](LICENSE)
+This repository is MIT licensed — see [LICENSE](LICENSE) — **with one exception.**
+
+The 16 skills under `skills/anthropic-official/` come from
+[anthropics/skills](https://github.com/anthropics/skills) and are **not MIT**.
+Each carries its own `LICENSE.txt` in its directory. Check it before
+redistributing them.
+
+Third-party content and its provenance is recorded in [CREDITS.md](CREDITS.md).
+The upstream repositories cloned into `references/` keep their own licenses, six
+of which state none at all — see
+[resources/reference-repos.md](resources/reference-repos.md).
 
 ---
 

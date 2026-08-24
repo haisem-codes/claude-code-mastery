@@ -1,3 +1,8 @@
+---
+name: monorepo-navigator
+description: Navigate and optimize monorepos across Turborepo, Nx, pnpm workspaces and Lerna: cross-package impact analysis, selective builds on affected packages, remote caching and dependency graph visualization. Use when working in a monorepo or migrating into one.
+---
+
 # Monorepo Navigator
 
 **Tier:** POWERFUL  

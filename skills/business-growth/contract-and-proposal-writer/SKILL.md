@@ -1,3 +1,8 @@
+---
+name: contract-and-proposal-writer
+description: Generate freelance contracts, project proposals, SOWs, NDAs and MSAs as structured Markdown with jurisdiction-aware clauses for US, EU, UK and DACH. Use when drafting a client contract, writing a proposal or SOW, or reviewing standard commercial terms. Not a substitute for legal counsel.
+---
+
 # Contract & Proposal Writer
 
 **Tier:** POWERFUL  

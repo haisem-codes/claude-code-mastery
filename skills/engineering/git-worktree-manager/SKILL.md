@@ -1,3 +1,8 @@
+---
+name: git-worktree-manager
+description: Run parallel feature work with Git worktrees: branch isolation, port allocation, environment sync and cleanup, so each worktree runs as an independent local app. Use when working several branches at once or giving each agent session its own worktree.
+---
+
 # Git Worktree Manager
 
 **Tier:** POWERFUL  

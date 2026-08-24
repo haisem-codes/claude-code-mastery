@@ -1,3 +1,8 @@
+---
+name: skill-tester
+description: Validate and score Claude Code skills: frontmatter and structure checks, script testing, multi-dimensional quality scoring and tier classification. Python stdlib only. Use when authoring a skill or auditing a skill library before publishing.
+---
+
 # Skill Tester
 
 ---

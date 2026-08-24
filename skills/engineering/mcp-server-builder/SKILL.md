@@ -1,3 +1,8 @@
+---
+name: mcp-server-builder
+description: Design and ship production MCP servers from API contracts, treating OpenAPI as the source of truth. Covers scaffolding, schema quality, validation and safe evolution in Python and TypeScript. Use when building or reviewing an MCP server.
+---
+
 # MCP Server Builder
 
 **Tier:** POWERFUL  

@@ -1,3 +1,8 @@
+---
+name: dependency-auditor
+description: Audit dependencies across multi-language projects for CVEs, license compliance, outdated packages and tree bloat, then plan safe upgrades. Use when reviewing supply chain risk, before a release, or when a vulnerability advisory lands.
+---
+
 # Dependency Auditor
 
 > **Skill Type:** POWERFUL  

@@ -1,0 +1,53 @@
+name: validate
+
+# The repo is public and examples/ is derived from a real machine, so the
+# redaction gate runs on every push and blocks the merge if anything leaks.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"   # oldest we claim to support
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Redaction gate
+        run: python3 scripts/sanitize.py --check
+
+      - name: Catalog is valid and current
+        run: |
+          python3 scripts/catalog.py --check
+          python3 scripts/catalog.py
+          git diff --exit-code catalog.json \
+            || { echo "::error::catalog.json is stale — run 'python3 scripts/catalog.py' and commit"; exit 1; }
+
+      - name: README counts match the catalog
+        run: python3 scripts/catalog.py --check-docs
+
+      - name: skill-rules.json is current
+        run: python3 scripts/gen-skill-rules.py --check
+
+      - name: Reference manifest parses
+        run: bash scripts/fetch-references.sh --list
+
+      - name: Hook contract
+        run: bash scripts/test-hooks.sh
+
+      - name: Installer end-to-end
+        run: bash scripts/test-install.sh
+
+      - name: Shipped tools import cleanly
+        run: |
+          for f in examples/tools/*.py scripts/*.py; do
+            python3 -c "import ast,sys; ast.parse(open('$f').read())" || exit 1
+          done

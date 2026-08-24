@@ -1,3 +1,8 @@
+---
+name: api-test-suite-builder
+description: Scan API routes across Next.js App Router, Express, FastAPI and Django REST, then generate test suites covering auth, validation, error codes, pagination, uploads and rate limiting. Outputs Vitest+Supertest or Pytest+httpx. Use when an API lacks tests or new endpoints need coverage.
+---
+
 # API Test Suite Builder
 
 **Tier:** POWERFUL

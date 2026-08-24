@@ -1,3 +1,8 @@
+---
+name: rag-architect
+description: Design and optimize production RAG pipelines: chunking strategies, embedding model selection, vector database choice, retrieval strategies and evaluation frameworks. Use when building retrieval over documents or debugging poor answer quality.
+---
+
 # RAG Architect - POWERFUL
 
 ## Overview

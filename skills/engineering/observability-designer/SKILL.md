@@ -1,3 +1,8 @@
+---
+name: observability-designer
+description: Design production observability across metrics, logs and traces, with SLI/SLO frameworks, golden signals, dashboard design and alert tuning. Use when instrumenting a service, defining SLOs, or reducing alert noise.
+---
+
 # Observability Designer (POWERFUL)
 
 **Category:** Engineering  
